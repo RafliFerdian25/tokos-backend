@@ -191,6 +191,14 @@
 								<p>Data Transaksi</p>
 							</a>
 						</li> <!-- end nav data transaksi -->
+						<!-- nav Tambah barang -->
+                        <li class="nav-item <?php if ($title == 'Form Tambah Barang | Sumber Jaya Furniture') : echo 'active';
+                                            endif; ?>">
+                            <a href="/tambah/tambah">
+                            <i class="fas fa-plus-circle"></i>
+                                <p>Tambah Barang</p>
+                            </a>
+                        </li> <!-- end nav tambah barang -->
 					</ul> <!-- end nav primary -->
 				</div> <!-- end sidebar content -->
 			</div> <!-- end sidebar wripper -->

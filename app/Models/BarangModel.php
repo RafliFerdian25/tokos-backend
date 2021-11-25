@@ -26,4 +26,12 @@ class BarangModel extends Model
 
         return $query;
     }
+
+    public function getSearchBarang($keyword)
+    {
+        $db = \Config\Database::connect();
+        $query = $db->query("SELECT barang.idbarang, barang.nama, barang.keterangan, barang.berat, barang.file_gambar, barang.harga, barang.stok, barang.tgl_insert AS tgl_input, barang.tgl_update AS tgl_update FROM barang WHERE barang.nama LIKE '%".$keyword."%'");
+
+        return $query;
+    }
 }

@@ -10,21 +10,22 @@
     <!-- Fonts and icons -->
     <script src="/assets/js/plugin/webfont/webfont.min.js"></script>
     <script>
-    WebFont.load({
-        google: {
-            "families": ["Lato:300,400,700,900"]
-        },
-        custom: {
-            "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands",
-                "simple-line-icons"
-            ],
-            urls: ['/assets/css/fonts.min.css']
-        },
-        active: function() {
-            sessionStorage.fonts = true;
-        }
-    });
+        WebFont.load({
+            google: {
+                "families": ["Lato:300,400,700,900"]
+            },
+            custom: {
+                "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands",
+                    "simple-line-icons"
+                ],
+                urls: ['/assets/css/fonts.min.css']
+            },
+            active: function() {
+                sessionStorage.fonts = true;
+            }
+        });
     </script>
+    <script src="script_admin.js"></script>
 
     <!-- CSS Files -->
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
@@ -45,8 +46,7 @@
                 <a href="/" class="logo">
                     <img src="/assets/img/title-logo.svg" alt="navbar brand" class="navbar-brand" style="height: 30px;">
                 </a>
-                <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
-                    data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon">
                         <i class="icon-menu"></i>
                     </span>
@@ -63,23 +63,11 @@
             <nav class="navbar navbar-header navbar-expand-lg" data-background-color="blue2">
 
                 <div class="container-fluid">
-                    <div class="collapse" id="search-nav">
-                        <form class="navbar-left navbar-form nav-search mr-md-3">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <button type="submit" class="btn btn-search pr-1">
-                                        <i class="fa fa-search search-icon"></i>
-                                    </button>
-                                </div>
-                                <input type="text" placeholder="Search ..." class="form-control">
-                            </div>
-                        </form>
-                    </div>
+
 
                     <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
                         <li class="nav-item toggle-nav-search hidden-caret">
-                            <a class="nav-link" data-toggle="collapse" href="#search-nav" role="button"
-                                aria-expanded="false" aria-controls="search-nav">
+                            <a class="nav-link" data-toggle="collapse" href="#search-nav" role="button" aria-expanded="false" aria-controls="search-nav">
                                 <i class="fa fa-search"></i>
                             </a>
                         </li> <!-- end search hidden -->
@@ -130,8 +118,7 @@
                         </li> <!-- end quick actions -->
 
                         <li class="nav-item dropdown hidden-caret">
-                            <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"
-                                aria-expanded="false">
+                            <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
                                 <div class="avatar-sm">
                                     <img src="/assets/img/ava-musa.jpg" alt="..." class="avatar-img rounded-circle">
                                 </div>
@@ -140,8 +127,7 @@
                                 <div class="dropdown-user-scroll scrollbar-outer">
                                     <li>
                                         <div class="user-box">
-                                            <div class="avatar-lg"><img src="/assets/img/ava-musa.jpg"
-                                                    alt="image profile" class="avatar-img rounded"></div>
+                                            <div class="avatar-lg"><img src="/assets/img/ava-musa.jpg" alt="image profile" class="avatar-img rounded"></div>
                                             <div class="u-text">
                                                 <h4>Musa</h4>
                                                 <p class="text-muted">musaalfianmaulana@students.undip.ac.id</p>
@@ -203,6 +189,14 @@
                                 <p>Data Transaksi</p>
                             </a>
                         </li> <!-- end nav data transaksi -->
+                        <!-- nav Tambah barang -->
+                        <li class="nav-item <?php if ($title == 'Form Tambah Barang | Sumber Jaya Furniture') : echo 'active';
+                                            endif; ?>">
+                            <a href="/tambah/tambah">
+                                <i class="fas fa-plus-circle"></i>
+                                <p>Tambah Barang</p>
+                            </a>
+                        </li> <!-- end nav tambah barang -->
                     </ul> <!-- end nav primary -->
                 </div> <!-- end sidebar content -->
             </div> <!-- end sidebar wripper -->
@@ -229,196 +223,87 @@
                             </li>
                         </ul>
                     </div> <!-- end page header -->
-                    <!-- barang section -->
-                    <div class="barang__section">
-                        <!-- menampilkan semua barang -->
-                        <div class="container" style="margin-top: 60px;">
-                            <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
-                                <!-- mengambil data barang -->
-                                <?php foreach ($barang as $data) : ?>
-                                <?php $idbarang = $data['idbarang']; ?>
-                                <div class="col-12 col-md-4 col-lg-3 mb-4">
-                                    <div class="p-3 border ">
-                                        <!-- barang content -->
-                                        <div class="barang__content">
-                                            <div class="col">
-                                                <div class="">
-                                                    <img src="/assets/img/productimg/<?= $data['file_gambar'] ?>"
-                                                        class="data__barang__gambar">
-                                                </div> <!-- end pictures -->
-                                                <h4 class="fw-bold"> <?= $data['nama']; ?></h4>
-                                                <p> Rp <?= $data['harga']; ?> <br> Stok: <?= $data['stok']; ?> </p>
-                                                <div class="barang__action">
-                                                    <a href="/admin/detail/<?= $data['idbarang']; ?>">
-                                                        <div class="btn btn-warning p-3 me-2">Ubah</div>
-                                                    </a>
-                                                    <a href="/edit/detailhapusbarang/<?= $data['idbarang']; ?>">
-                                                        <div class="btn btn-danger p-3">Hapus</div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- end barang content -->
-                                    </div>
-                                </div>
-                                <?php endforeach; ?>
-                                <!-- end ambil data barang -->
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end barang section -->
+
                     <!-- Tabel Barang -->
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">
-                                <div class="card-header">
-                                    <div class="d-flex align-items-center">
-                                        <h4 class="card-title">Data Barang</h4>
-                                        <a class="d-block ml-auto" href="/tambah/tambah">
-                                            <button class="btn btn-primary btn-round d-flex align-items-center">
-                                                <i class="la flaticon-add d-block mr-2"></i>
-                                                <span class="d-block">Tambah Barang</span>
-                                            </button>
-                                        </a>
-                                    </div>
+                                <!-- search -->
+                                <div class="col">
+                                <div class="col-12">
+                                <div class="collapse  mx-auto my-3" id="search-nav">
+                                    <form name="form_search" method="GET" action="" class="navbar-left navbar-form nav-search mr-md-3">
+                                        <div class="input-group">
+                                            <input type="text" name="inputsearch" oninput="searchbarang()" name="inputsearch" placeholder="Search ..." class="form-control">
+                                            <div class="input-group-prepend">
+                                                <a href="/" id="search" class="p-2">
+                                                <i class="fa fa-search search-icon"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
-
+                                </div>
+                                </div>
+                                <!-- end search -->
                                 <div class="card-body">
                                     <!-- alert kelola barang -->
                                     <?php if (session()->getFlashdata('add-msg-barang')) : ?>
-                                    <div class="alert alert-success" role="alert">
-                                        <?= session()->getFlashdata('add-msg-barang'); ?>
-                                    </div>
+                                        <div class="alert alert-success" role="alert">
+                                            <?= session()->getFlashdata('add-msg-barang'); ?>
+                                        </div>
                                     <?php endif; ?>
                                     <?php if (session()->getFlashdata('edit-msg-barang')) : ?>
-                                    <div class="alert alert-success" role="alert">
-                                        <?= session()->getFlashdata('edit-msg-barang'); ?>
-                                    </div>
+                                        <div class="alert alert-success" role="alert">
+                                            <?= session()->getFlashdata('edit-msg-barang'); ?>
+                                        </div>
                                     <?php endif; ?>
                                     <?php if (session()->getFlashdata('delete-msg-barang')) : ?>
-                                    <div class="alert alert-danger" role="alert">
-                                        <?= session()->getFlashdata('delete-msg-barang'); ?>
-                                    </div>
+                                        <div class="alert alert-danger" role="alert">
+                                            <?= session()->getFlashdata('delete-msg-barang'); ?>
+                                        </div>
                                     <?php endif; ?>
                                     <!-- end alert kelola barang -->
-
-                                    <div class="table-responsive">
-                                        <table id="add-row" class="display table table-striped table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>No</th>
-                                                    <th>Nama Barang</th>
-                                                    <th>Kategori</th>
-                                                    <th>Harga</th>
-                                                    <th>Stok</th>
-                                                    <th style="width: 10%">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php foreach ($barang as $data) : ?>
+                                </div>
+                                <!-- barang section -->
+                                <div class="barang__section">
+                                    <!-- menampilkan semua barang -->
+                                    <div class="container" style="margin-top: 60px;">
+                                        <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
+                                            <!-- mengambil data barang -->
+                                            <?php foreach ($barang as $data) : ?>
                                                 <?php $idbarang = $data['idbarang']; ?>
-                                                <tr>
-                                                    <td><?= $j; ?></td>
-                                                    <td><?= $data['nama']; ?></td>
-                                                    <td><?= $data['kategori']; ?></td>
-                                                    <td><?= $data['harga']; ?></td>
-                                                    <td><?= $data['stok']; ?></td>
-                                                    <td>
-                                                        <div class="form-button-action">
-                                                            <a href="/admin/detail/<?= $data['idbarang']; ?>"
-                                                                class="d-flex">
-                                                                <button type="button" data-toggle="tooltip" title=""
-                                                                    class="btn btn-link btn-primary btn-lg"
-                                                                    data-original-title="Lihat dan Edit">
-                                                                    <i class="fa fa-edit"></i>
-                                                                </button>
-                                                            </a>
-                                                            <a href="/edit/detailhapusbarang/<?= $data['idbarang']; ?>"
-                                                                class="d-flex">
-                                                                <button type="button" data-toggle="tooltip" title=""
-                                                                    class="btn btn-link btn-danger"
-                                                                    data-original-title="Hapus">
-                                                                    <i class="far fa-trash-alt"></i>
-                                                                </button>
-                                                            </a>
+                                                <div class="col-12 col-xl-3 col-sm-6 col-md-4 mb-4">
+                                                    <div class="p-3 border ">
+                                                        <!-- barang content -->
+                                                        <div class="barang__content">
+                                                            <div class="col">
+                                                                <div class="">
+                                                                    <img src="/assets/img/productimg/<?= $data['file_gambar'] ?>" class="data__barang__gambar">
+                                                                </div> <!-- end pictures -->
+                                                                <h4 class="fw-bold"> <?= $data['nama']; ?></h4>
+                                                                <p> Rp <?= $data['harga']; ?> <br> Stok: <?= $data['stok']; ?> </p>
+                                                                <div class="barang__action">
+                                                                    <a href="/admin/detail/<?= $data['idbarang']; ?>">
+                                                                        <div class="btn btn-warning px-3 py-1 me-2">Ubah</div>
+                                                                    </a>
+                                                                    <a href="/edit/detailhapusbarang/<?= $data['idbarang']; ?>">
+                                                                        <div class="btn btn-danger px-3 py-1">Hapus</div>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </td>
-                                                </tr>
-                                                <?php $j++; ?>
-                                                <?php endforeach; ?>
-                                            </tbody>
-                                        </table>
+                                                        <!-- end barang content -->
+                                                    </div>
+                                                </div>
+                                            <?php endforeach; ?>
+                                            <!-- end ambil data barang -->
+                                        </div>
                                     </div>
                                 </div>
+                                <!-- end barang section -->
                             </div>
                         </div> <!-- end tabel barang -->
-
-                        <!-- Tabel Kategori -->
-                        <div class="col-md-12">
-                            <div id="data-kategori" class="card">
-                                <div class="card-header">
-                                    <div class="d-flex align-items-center">
-                                        <h4 class="card-title">Data Kategori</h4>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <!-- alert kelola kategori -->
-                                    <?php if (session()->getFlashdata('edit-msg-kategori')) : ?>
-                                    <div class="alert alert-success" role="alert">
-                                        <?= session()->getFlashdata('edit-msg-kategori'); ?>
-                                    </div>
-                                    <?php endif; ?>
-                                    <?php if (session()->getFlashdata('delete-msg-kategori')) : ?>
-                                    <div class="alert alert-danger" role="alert">
-                                        <?= session()->getFlashdata('delete-msg-kategori'); ?>
-                                    </div>
-                                    <?php endif; ?>
-                                    <!-- end alert kelola kategori -->
-
-                                    <div class="table-responsive">
-                                        <table id="add-row2" class="display table table-striped table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>No</th>
-                                                    <th>Kategori</th>
-                                                    <th style="width: 10%">Action</th>
-                                                </tr>
-                                            </thead>
-
-                                            <tbody>
-                                                <?php foreach ($kategori as $data) : ?>
-                                                <tr>
-                                                    <td><?= $i; ?></td>
-                                                    <td><?= $data['nama']; ?></td>
-                                                    <td>
-                                                        <div class="form-button-action">
-                                                            <a href="/edit/kategori/<?= $data['idkategori']; ?>"
-                                                                class="d-flex">
-                                                                <button type="button" data-toggle="tooltip" title=""
-                                                                    class="btn btn-link btn-primary btn-lg"
-                                                                    data-original-title="Lihat dan Edit">
-                                                                    <i class="fa fa-edit"></i>
-                                                                </button>
-                                                            </a>
-                                                            <a href="/edit/detailhapuskategori/<?= $data['idkategori']; ?>"
-                                                                class="d-flex">
-                                                                <button type="button" data-toggle="tooltip" title=""
-                                                                    class="btn btn-link btn-danger"
-                                                                    data-original-title="Hapus">
-                                                                    <i class="far fa-trash-alt"></i>
-                                                                </button>
-                                                            </a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <?php $i++; ?>
-                                                <?php endforeach; ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div> <!-- end card body -->
-                            </div> <!-- end card -->
-                        </div> <!-- end tabel kategori -->
                     </div> <!-- end row -->
                 </div> <!-- end page inner -->
             </div> <!-- end container -->
@@ -454,82 +339,86 @@
     <!-- Atlantis DEMO methods, don't include it in your project! -->
     <script src="/assets/js/setting-demo2.js"></script>
     <script>
-    $(document).ready(function() {
-        $('#basic-datatables').DataTable({});
+        $(document).ready(function() {
+            $('#basic-datatables').DataTable({});
 
-        $('#multi-filter-select').DataTable({
-            "pageLength": 5,
-            initComplete: function() {
-                this.api().columns().every(function() {
-                    var column = this;
-                    var select = $(
-                            '<select class="form-control"><option value=""></option></select>'
-                        )
-                        .appendTo($(column.footer()).empty())
-                        .on('change', function() {
-                            var val = $.fn.dataTable.util.escapeRegex(
-                                $(this).val()
-                            );
+            $('#multi-filter-select').DataTable({
+                "pageLength": 5,
+                initComplete: function() {
+                    this.api().columns().every(function() {
+                        var column = this;
+                        var select = $(
+                                '<select class="form-control"><option value=""></option></select>'
+                            )
+                            .appendTo($(column.footer()).empty())
+                            .on('change', function() {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                    $(this).val()
+                                );
 
-                            column
-                                .search(val ? '^' + val + '$' : '', true, false)
-                                .draw();
+                                column
+                                    .search(val ? '^' + val + '$' : '', true, false)
+                                    .draw();
+                            });
+
+                        column.data().unique().sort().each(function(d, j) {
+                            select.append('<option value="' + d + '">' + d +
+                                '</option>')
                         });
-
-                    column.data().unique().sort().each(function(d, j) {
-                        select.append('<option value="' + d + '">' + d +
-                            '</option>')
                     });
-                });
-            }
+                }
+            });
+
+            // Add Row
+            $('#add-row').DataTable({
+                "pageLength": 5,
+            });
+
+            var action =
+                '<td> <div class="form-button-action"> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Lihat dan Edit"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Hapus"> <i class="far fa-trash-alt"></i> </button> </div> </td>';
+
+            $('#addRowButton').click(function() {
+                $('#add-row').dataTable().fnAddData([
+                    $("#addName").val(),
+                    $("#addPosition").val(),
+                    $("#addOffice").val(),
+                    action
+                ]);
+                $('#addRowModal').modal('hide');
+
+            });
+
+
+            $('#add-row2').DataTable({
+                "pageLength": 5,
+            });
+
+            var action =
+                '<td> <div class="form-button-action"> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Lihat dan Edit"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Hapus"> <i class="far fa-trash-alt"></i> </button> </div> </td>';
+
+            $('#addRowButton').click(function() {
+                $('#add-row2').dataTable().fnAddData([
+                    $("#addName").val(),
+                    $("#addPosition").val(),
+                    $("#addOffice").val(),
+                    action
+                ]);
+                $('#addRowModal').modal('hide');
+
+            });
         });
-
-        // Add Row
-        $('#add-row').DataTable({
-            "pageLength": 5,
-        });
-
-        var action =
-            '<td> <div class="form-button-action"> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Lihat dan Edit"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Hapus"> <i class="far fa-trash-alt"></i> </button> </div> </td>';
-
-        $('#addRowButton').click(function() {
-            $('#add-row').dataTable().fnAddData([
-                $("#addName").val(),
-                $("#addPosition").val(),
-                $("#addOffice").val(),
-                action
-            ]);
-            $('#addRowModal').modal('hide');
-
-        });
-
-
-        $('#add-row2').DataTable({
-            "pageLength": 5,
-        });
-
-        var action =
-            '<td> <div class="form-button-action"> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Lihat dan Edit"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Hapus"> <i class="far fa-trash-alt"></i> </button> </div> </td>';
-
-        $('#addRowButton').click(function() {
-            $('#add-row2').dataTable().fnAddData([
-                $("#addName").val(),
-                $("#addPosition").val(),
-                $("#addOffice").val(),
-                action
-            ]);
-            $('#addRowModal').modal('hide');
-
-        });
-    });
     </script>
     <script>
-    function delete_barang(idbarang) {
-        if (confirm("Are you sure you want to remove it?")) {
-            window.location.href = "<?php echo base_url(); ?>/edit/hapusbarang/" + idbarang;
+        function delete_barang(idbarang) {
+            if (confirm("Are you sure you want to remove it?")) {
+                window.location.href = "<?php echo base_url(); ?>/edit/hapusbarang/" + idbarang;
+            }
+            return false;
+        } 
+        function searchbarang(){
+            var keyword = encodeURI(document.getElementById("inputsearch").value);
+            document.getElementById("search").href = "/admin/transaksi";
         }
-        return false;
-    }
     </script>
 </body>
 

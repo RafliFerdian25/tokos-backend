@@ -185,7 +185,7 @@
 
                     <ul class="nav nav-primary">
                         <li class="nav-item <?php if ($title == 'Admin Dashboard | Sumber Jaya Furniture') : echo 'active';
-											endif; ?>">
+                                            endif; ?>">
                             <a href="/">
                                 <i class="fas fa-home"></i>
                                 <p>Dashboard</p>
@@ -193,7 +193,7 @@
                         </li> <!-- end nav item -->
 
                         <li class="nav-item <?php if ($title == 'Data Barang | Sumber Jaya Furniture') : echo 'active';
-											endif; ?>">
+                                            endif; ?>">
                             <a href="/admin/barang">
                                 <i class="fas fa-box-open"></i>
                                 <p>Data Barang</p>
@@ -201,12 +201,20 @@
                         </li> <!-- end nav data barang -->
 
                         <li class="nav-item <?php if ($title == 'Data Transaksi | Sumber Jaya Furniture') : echo 'active';
-											endif; ?>">
+                                            endif; ?>">
                             <a href="/admin/transaksi">
                                 <i class="fas fa-shopping-cart"></i>
                                 <p>Data Transaksi</p>
                             </a>
-                        </li> <!-- end nav data transaksi -->
+                        </li> <!-- end nav data barang -->
+                        <!-- nav Tambah barang -->
+                        <li class="nav-item <?php if ($title == 'Form Tambah Barang | Sumber Jaya Furniture') : echo 'active';
+                                            endif; ?>">
+                            <a href="/tambah/tambah">
+                                <i class="fas fa-plus-circle"></i>
+                                <p>Tambah Barang</p>
+                            </a>
+                        </li> <!-- end nav tambah barang -->
                     </ul> <!-- end nav primary -->
                 </div> <!-- end sidebar content -->
             </div> <!-- end sidebar wripper -->
@@ -362,31 +370,31 @@
                                                 <?php foreach ($bulan as $bulan) : ?>
                                                 <tr>
                                                     <td><?php if ($bulan['bulan'] == 1) {
-																echo "Januari";
-															} else if ($bulan['bulan'] == 2) {
-																echo "Februari";
-															} else if ($bulan['bulan'] == 3) {
-																echo "Maret";
-															} else if ($bulan['bulan'] == 4) {
-																echo "April";
-															} else if ($bulan['bulan'] == 5) {
-																echo "Mei";
-															} else if ($bulan['bulan'] == 6) {
-																echo "Juni";
-															} else if ($bulan['bulan'] == 7) {
-																echo "Juli";
-															} else if ($bulan['bulan'] == 8) {
-																echo "Agustus";
-															} else if ($bulan['bulan'] == 9) {
-																echo "September";
-															} else if ($bulan['bulan'] == 10) {
-																echo "Oktober";
-															} else if ($bulan['bulan'] == 11) {
-																echo "November";
-															} else if ($bulan['bulan'] == 12) {
-																echo "Desember";
-															}
-															?></td>
+                                                                echo "Januari";
+                                                            } else if ($bulan['bulan'] == 2) {
+                                                                echo "Februari";
+                                                            } else if ($bulan['bulan'] == 3) {
+                                                                echo "Maret";
+                                                            } else if ($bulan['bulan'] == 4) {
+                                                                echo "April";
+                                                            } else if ($bulan['bulan'] == 5) {
+                                                                echo "Mei";
+                                                            } else if ($bulan['bulan'] == 6) {
+                                                                echo "Juni";
+                                                            } else if ($bulan['bulan'] == 7) {
+                                                                echo "Juli";
+                                                            } else if ($bulan['bulan'] == 8) {
+                                                                echo "Agustus";
+                                                            } else if ($bulan['bulan'] == 9) {
+                                                                echo "September";
+                                                            } else if ($bulan['bulan'] == 10) {
+                                                                echo "Oktober";
+                                                            } else if ($bulan['bulan'] == 11) {
+                                                                echo "November";
+                                                            } else if ($bulan['bulan'] == 12) {
+                                                                echo "Desember";
+                                                            }
+                                                            ?></td>
                                                     <td><?= $bulan['jumlah']; ?></td>
                                                     <td><?= number_format($bulan['total_penjualan']); ?></td>
                                                     <td><a href="/admin/laporan/<?= $bulan['bulan']; ?>"
