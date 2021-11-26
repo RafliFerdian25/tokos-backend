@@ -14,8 +14,8 @@ class RekapPenjualanModel extends Model
     public function getRekap($bln)
     {
         $db = \Config\Database::connect();
-        $query = $db->query("SELECT barang.nama AS namaBarang, MONTH(rekap_penjualan.tgl_input) AS bulan, kategori.nama AS namaKategori,SUM(rekap_penjualan.jumlah) AS jumlah, rekap_penjualan.harga_satuan AS hargaSatuan, SUM(rekap_penjualan.total_penjualan) AS totalPenjualan
-        FROM ((rekap_penjualan JOIN barang ON rekap_penjualan.idbarang = barang.idbarang) JOIN kategori ON barang.idkategori = kategori.idkategori )
+        $query = $db->query("SELECT barang.nama AS namaBarang, MONTH(rekap_penjualan.tgl_input) AS bulan, SUM(rekap_penjualan.jumlah) AS jumlah, rekap_penjualan.harga_satuan AS hargaSatuan, SUM(rekap_penjualan.total_penjualan) AS totalPenjualan
+        FROM (rekap_penjualan JOIN barang ON rekap_penjualan.idbarang = barang.idbarang)
         WHERE MONTH(rekap_penjualan.tgl_input) = ".$bln."
         GROUP BY barang.nama");
         
@@ -54,8 +54,8 @@ class RekapPenjualanModel extends Model
     public function getTerlaris()
     {
         $db      = \Config\Database::connect();
-        $query = $db->query("SELECT barang.nama AS namaBarang, kategori.nama AS namaKategori,SUM(rekap_penjualan.jumlah) AS total_terjual
-        From ((rekap_penjualan JOIN barang ON rekap_penjualan.idbarang = barang.idbarang) JOIN kategori ON barang.idkategori = kategori.idkategori)
+        $query = $db->query("SELECT barang.nama AS namaBarang,SUM(rekap_penjualan.jumlah) AS total_terjual
+        From rekap_penjualan JOIN barang ON rekap_penjualan.idbarang = barang.idbarang
         GROUP BY rekap_penjualan.idbarang");
         
         return $query;

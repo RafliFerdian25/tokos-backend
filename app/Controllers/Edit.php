@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\KategoriModel;
+//use App\Models\KategoriModel;
 use App\Models\BarangModel;
 use App\Models\PenjualanModel;
 use App\Models\StatusModel;
@@ -10,7 +10,7 @@ use App\Models\StatusPenjualanModel;
 
 class Edit extends BaseController
 {
-    protected $kategoriModel;
+    //protected $kategoriModel;
     protected $barangModel;
     protected $penjualanModel;
     protected $statusModel;
@@ -18,7 +18,7 @@ class Edit extends BaseController
 
     public function __construct()
     {
-        $this->kategoriModel = new KategoriModel();
+        //$this->kategoriModel = new KategoriModel();
         $this->barangModel = new BarangModel();
         $this->penjualanModel = new PenjualanModel();
         $this->statusModel = new StatusModel();
@@ -29,14 +29,14 @@ class Edit extends BaseController
     {
         $query = $this->barangModel->getBarangid($idbarang);
         $barang = $query->getResultArray();
-        $kategori = $this->kategoriModel->findAll();
+        //$kategori = $this->kategoriModel->findAll();
 
         // dd($barang);
 
         $data = [
             'title' => 'Form Edit Barang | Sumber Jaya Furniture',
-            'barang' => $barang,
-            'kategori' => $kategori
+            'barang' => $barang
+            //'kategori' => $kategori
             
         ];
 

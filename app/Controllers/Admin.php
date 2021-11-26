@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\KategoriModel;
+//use App\Models\KategoriModel;
 use App\Models\BarangModel;
 use App\Models\PenjualanModel;
 use App\Models\RekapPenjualanModel;
@@ -11,14 +11,14 @@ use function PHPUnit\Framework\throwException;
 
 class Admin extends BaseController
 {
-    protected $kategoriModel;
+    //protected $kategoriModel;
     protected $barangModel;
     protected $penjualanModel;
     protected $RekapPenjualanModel;
 
     public function __construct()
     {
-        $this->kategoriModel = new KategoriModel();
+        //$this->kategoriModel = new KategoriModel();
         $this->barangModel = new BarangModel();
         $this->penjualanModel = new PenjualanModel();
         $this->RekapPenjualanModel = new RekapPenjualanModel();
@@ -41,7 +41,6 @@ class Admin extends BaseController
         //total pendapatan
         $total_pendapatan = $this->RekapPenjualanModel->getTotalPendapatan();
         $pendapatan = $total_pendapatan->getResultArray();
-
         //terlaris
         $barangTerlaris = $this->RekapPenjualanModel->getTerlaris();
         $terlaris = $barangTerlaris->getResultArray();
@@ -68,13 +67,13 @@ class Admin extends BaseController
     public function barang()
     {
         $query = $this->barangModel->getBarang();
-        $kategori = $this->kategoriModel->findAll();
+        //$kategori = $this->kategoriModel->findAll();
         $barang = $query->getResultArray();
 
 
         $data = [
             'title' => 'Data Barang | Sumber Jaya Furniture',
-            'kategori' => $kategori,
+            //'kategori' => $kategori,
             'barang' => $barang
         ];
 
@@ -87,13 +86,13 @@ class Admin extends BaseController
     public function searchbarang($keyword)
     {
         $query = $this->barangModel->getSearchBarang($keyword);
-        $kategori = $this->kategoriModel->findAll();
+        //$kategori = $this->kategoriModel->findAll();
         $barang = $query->getResultArray();
 
 
         $data = [
             'title' => 'Data Barang | Sumber Jaya Furniture',
-            'kategori' => $kategori,
+            //'kategori' => $kategori,
             'barang' => $barang
         ];
 
