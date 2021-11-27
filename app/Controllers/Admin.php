@@ -81,27 +81,22 @@ class Admin extends BaseController
         if (empty($data['barang'])) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Data barang tidak ditemukan');
         }
+        helper('form');
         return view('admin/data_barang', $data);
     }
-    public function searchbarang($keyword)
+    public function search()
     {
-        $query = $this->barangModel->getSearchBarang($keyword);
-        //$kategori = $this->kategoriModel->findAll();
+        $request = \Config\Services::request();
+        $keyword = $request->getPost('keyword');
+        $query = $this->barangModel->get_product_keyword($keyword);
         $barang = $query->getResultArray();
-
-
         $data = [
             'title' => 'Data Barang | Sumber Jaya Furniture',
-            //'kategori' => $kategori,
             'barang' => $barang
         ];
-
-        //jika barang tidak ada di table
-        if (empty($data['barang'])) {
-            throw new \CodeIgniter\Exceptions\PageNotFoundException('Data barang tidak ditemukan');
-        }
+        helper('form');
         // dd($barang);
-        return view('admin/data_barang', $data);
+        return view('admin/search', $data);
     }
 
     public function transaksi()

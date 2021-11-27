@@ -29,6 +29,7 @@
 	/* **** Data Barang **** */
 	.keterangan__barang{
 	/* max-width: 50%; */
+	text-align: left !important;
 	}
 	.gambar__barang{
 		/* max-width: 50%; */
@@ -67,6 +68,37 @@
 	padding: 20px;
 }
 .form__search{
-	border:1px solid #ced4da !important;
-	border-radius: .25rem !important;
+	border: 1px solid #666666 !important;
+	border-radius: .5rem !important;
+	padding: 5px;
+	transition: all .5s ease-in-out;
+	width:100%;
+}
+.form__search:hover{
+	box-shadow: #000000;
+	background-color:#fff9ca;
+	transition: all .5s ease-in-out;
+	font-size: 15px;
+	padding: 1px;
+}
+.form__search__text{
+	background: none;
+	border: none;
+	font-size:larger;
+}
+.form__search__text:hover{
+	/* font-size:x-large; */
+}
+.form__search__submit{
+	border: none;
+	background: none;
+	text-align: center;
+	transition: all .5s ease-in-out;
+}
+.form__search__submit:hover{
+	font-size: large;
+	transition: all .5s ease-in-out;
+}
+.keterangan__barang{
+	text-align: center;
 }

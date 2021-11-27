@@ -53,7 +53,7 @@
                                     <div class="mx-auto my-3" id="search-nav">
 
                                         <!-- <form name="form_search" method="GET" action="" class=""> -->
-                                        <div class="form__search">
+                                        <div class="form__search form-control">
                                             <?php echo form_open("/admin/search") ?>
                                             <button class="form__search__submit p-1 btn" type="submit"
                                                 name="search_submit" value="cari"><i

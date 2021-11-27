@@ -30,8 +30,18 @@ class BarangModel extends Model
     public function getSearchBarang($keyword)
     {
         $db = \Config\Database::connect();
-        $query = $db->query("SELECT barang.idbarang, barang.nama, barang.keterangan, barang.berat, barang.file_gambar, barang.harga, barang.stok, barang.tgl_insert AS tgl_input, barang.tgl_update AS tgl_update FROM barang WHERE barang.nama LIKE '%".$keyword."%'");
+        $query = $db->query("SELECT barang.idbarang, barang.nama, barang.keterangan, barang.berat, barang.file_gambar, barang.harga, barang.stok, barang.tgl_insert AS tgl_input, barang.tgl_update AS tgl_update FROM barang WHERE barang.nama LIKE '%" . $keyword . "%'");
 
+        return $query;
+    }
+    public function get_product_keyword($keyword)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('barang');
+        $builder->select();
+        $builder->like('nama', $keyword);
+        $builder->orlike('harga', $keyword);
+        $query = $builder->get();
         return $query;
     }
 }

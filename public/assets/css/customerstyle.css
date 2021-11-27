@@ -1,0 +1,76 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "DM Sans", sans-serif;
+}
+
+nav {
+  position: sticky;
+  top: 0;
+  transition: top 0.5s;
+}
+a {
+  color: #466545;
+}
+/* nav */
+.nav-link {
+  color: #466545;
+  margin: 0 10px;
+  font-weight: 400 !important;
+}
+
+.active {
+  font-size: large !important;
+  font-weight: 700 !important;
+  color: #466545;
+}
+
+/* main */
+/* header */
+h5 {
+  font-weight: 700;
+}
+.btnproduk:hover {
+  font-size: larger;
+}
+
+/* footer */
+footer {
+  background-color: #767672;
+  color: white;
+}
+
+.akun a {
+  color: white;
+  text-decoration: none;
+  margin-left: 1vw;
+}
+
+/* index */
+
+/* PRODUK.HTML */
+.inputbarang {
+  width: 700px;
+  margin: 40px auto;
+}
+
+.inputbarang .btn-outline-secondary {
+  border-radius: 0;
+  background-color: #466545;
+  color: white;
+}
+
+/* PROFILE.HTML */
+.container .row tr {
+  margin-bottom: 4rem;
+}
+
+/* UBAH DATA */
+.dataUbah button {
+  float: right;
+  background-color: hsl(54, 100%, 61%);
+  color: white;
+  font-weight: 700;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap");

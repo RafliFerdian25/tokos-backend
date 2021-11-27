@@ -186,6 +186,7 @@
                     </div> <!-- end user -->
 
                     <ul class="nav nav-primary">
+                        <li><a href="/customer/index">Pindah</a></li>
                         <li class="nav-item <?php if ($title == 'Admin Dashboard | Sumber Jaya Furniture') : echo 'active';
                                             endif; ?>">
                             <a href="/">
