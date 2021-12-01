@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ubah Data Diri</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="customerstyle.css">
+    <link rel="shortcut icon" href="images/favicon/favicon.png" type="image/x-icon">
+</head>
+<body>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg " id="navbar" style="background:#FDF9D5">
+        <div class="container p-2">
+          <img src="images/tokos.png" style="height: 60px; background-size: cover;" alt="">
+          <button class="navbar-toggler navbar-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span style="height: 3vh;" class="navbar-toggler-icon" ></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end" style="height: 3vw;" id="navbarNavAltMarkup">
+            <div class="navbar-nav" style="display: flex;" >
+              <a class="nav-link" href="index.html">Home</a>
+              <a class="nav-link" href="produk.html">Produk</a>
+              <a class="nav-link" href="keranjang.html">Keranjang</a>
+              <a class="nav-link" style="font-weight: 700; font-size: large;" href="profile.html">Profile</a>
+            </div>
+          </div>
+        </div>
+    </nav>
+
+    <!-- main -->
+    <div class="container">
+        <h5 class="header mt-5 mb-4" style="font-weight: 700;text-align: center;">Profile saya</h5>
+        <div class="container">
+            <form action="">
+                <!-- input gambar preview -->
+                <div class="form-group mt-lg-5 mt-md-4">
+                    <img id="image-preview-update" width="200" height="200" src="http://placehold.it/100x100" alt="image preview" width="200px"/>
+                    <br>
+                    <input class="" type="file" style="display:none" value="Pilih Gambar / File" id="image-source-update"  onchange="previewImageUpdate().value=this.value"/>  
+                    <input type="button" class="btn btn-primary mt-4 mb-4" value="Pilih Foto Lain" onclick="document.getElementById('image-source-update').click()">    
+                </div>
+                <div class="dataUbah">
+                    <!-- nama -->
+                    <div class="input-group mb-3">
+                        <span style="margin-right:2rem;">Nama</span>
+                        <input type="text" class="form-control" style="float: right;" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <!-- alamat -->
+                    <div class="input-group mb-3">
+                        <span style="margin-right:2rem;">Alamat</span>
+                        <textarea name=""  class="form-control"  id="" cols="30" rows="10"></textarea>
+                    </div>
+                    <!-- nohp -->
+                    <div class="input-group mb-3">
+                        <span style="margin-right:2rem;">No HP</span>
+                        <input type="number" class="form-control" style="float: right;" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <!-- email -->
+                    <div class="input-group mb-3">
+                        <span style="margin-right:2rem;">Email</span>
+                        <input type="number" class="form-control" style="float: right;" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <!-- jenis Kelamin -->
+                    <div class="input-group mb-3">
+                        <p style="margin-right:2rem;">Jenis Kelamin</p>
+                        <div class="form-check" >
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              Laki-laki
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label " for="flexCheckDefault">
+                              Perempuan
+                            </label>
+                        </div>
+                    </div>
+                    <button class="btn" type="submit" >Submit</button>
+                </div> 
+            </form>
+        </div>
+    </div>
+    <!-- footer -->
+    <footer>
+        <div class="isi" style="border-bottom:#FDF9D5 0.1vw solid;">
+            <div class="container justify-content-end " >
+                <div class="main" style="margin-top: 9vw;">
+                    <p style="font-size: 2vw; font-weight: 700;  padding-top: 3vw;">Social Media</p>
+                </div>
+                <div class="akun" style="margin-bottom: 2vw;">
+                    <img src="images/facebook.png" style="width: 15px;background-size: cover;" alt="">
+                      <a class="facebook" href="https://web.facebook.com/?_rdc=1&_rdr">Tokos</a><br>
+                    <img src="images/mail.png" style="width: 15px;background-size: cover;" alt=""><a class="mail"
+                      href="https://webmail.au.syrahost.com/">tokos@gmail.com</a><br>
+                    <img src="images/twitter.png" style="width: 15px;background-size: cover;" alt=""><a class="facebook"
+                      href="https://twitter.com/login">toko_anak_kos</a>
+                  </div>
+            </div>
+        </div>
+        <div class="container" style="width: 90%;">
+            <p style="padding: 2vh 0;font-size: 1vw;"> Tokos Copyright ©  2021 Toko Anak Kos Tembalang.</p>
+        </div>
+    </footer>
+
+    <script src="navbar.js">
+    </script>
+    <script>
+        function previewImageUpdate() {
+        document.getElementById("image-preview-update").style.display = "block";
+        var oFReader = new FileReader();
+        oFReader.readAsDataURL(document.getElementById("image-source-update").files[0]);
+    
+        oFReader.onload = function(oFREvent) {
+            document.getElementById("image-preview-update").src = oFREvent.target.result;
+            };
+        };
+    </script>
+</body>
+</html>

@@ -63,16 +63,6 @@
                                 </div> <!-- end harga -->
 
                                 <div class="form-group form-show-validation row">
-                                    <label for="berat" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Berat (Kg)
-                                        <span class="required-label">*</span></label>
-                                    <br>
-                                    <div class="col-lg-7 col-md-9 col-sm-8">
-                                        <input class="form-control" type="number" id="berat" min="1" step="1"
-                                            name="berat">
-                                    </div>
-                                </div> <!-- end berat -->
-
-                                <div class="form-group form-show-validation row">
                                     <label for="keterangan"
                                         class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Keterangan <span
                                             class="required-label">*</span></label>

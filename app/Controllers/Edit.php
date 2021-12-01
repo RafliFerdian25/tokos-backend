@@ -37,7 +37,7 @@ class Edit extends BaseController
             'title' => 'Form Edit Barang | Sumber Jaya Furniture',
             'barang' => $barang
             //'kategori' => $kategori
-            
+
         ];
 
         // dd($data);
@@ -45,7 +45,7 @@ class Edit extends BaseController
         return view('admin/edit/form-edit-barang', $data);
     }
 
-    
+
 
     public function kategori($idkategori)
     {
@@ -69,7 +69,7 @@ class Edit extends BaseController
         return view('admin/delete/form-delete-kategori', $data);
     }
 
-    
+
     public function hapuskategori($idkategori)
     {
         $this->kategoriModel->delete($idkategori);
@@ -105,10 +105,10 @@ class Edit extends BaseController
         // dd($barang);
         return view('admin/delete/form-delete-barang', $data);
     }
-    
+
     public function hapusbarang($idbarang)
     {
-        
+
         $this->barangModel->delete($idbarang);
 
         session()->setFlashdata('delete-msg-barang', 'Data Barang berhasil dihapus.');
@@ -116,22 +116,21 @@ class Edit extends BaseController
         return redirect()->to('/admin/barang');
     }
 
-    
+
 
     public function editbarang($idbarang)
-    {   
+    {
         $image = $this->request->getFile('image');
-            if($image->getError() == 4){ //user tidak upload file
-                $namaImage = $this->request->getVar('imageLama');
-            } else { //jika user upload file baru
-                //mengambil nama file gambar
-                $namaImage = $image->getName();
-                //pindahkan letak file
-                $image->move('assets/img/productimg',$namaImage);
-                //hapus file lama
-                unlink('assets/img/productimg/'. $this->request->getVar('imageLama'));
-                
-            }
+        if ($image->getError() == 4) { //user tidak upload file
+            $namaImage = $this->request->getVar('imageLama');
+        } else { //jika user upload file baru
+            //mengambil nama file gambar
+            $namaImage = $image->getName();
+            //pindahkan letak file
+            $image->move('assets/img/productimg', $namaImage);
+            //hapus file lama
+            unlink('assets/img/productimg/' . $this->request->getVar('imageLama'));
+        }
         $data = [
             'idbarang' => $idbarang,
             'nama' => $this->request->getVar('nama'),
@@ -142,8 +141,8 @@ class Edit extends BaseController
             'keterangan' => $this->request->getVar('keterangan'),
             'file_gambar' => $namaImage
         ];
-        
-        
+
+
 
         $this->barangModel->update($idbarang, $data);
 
@@ -158,14 +157,14 @@ class Edit extends BaseController
         $transaksi = $query->getResultArray();
         $status = $this->statusModel->findAll();
         $statusPenjualan = $this->statusPenjualanModel->findAll();
-        
+
 
         $data = [
             'title' => 'Form Edit Barang | Sumber Jaya Furniture',
             'transaksi' => $transaksi,
             'status' => $status,
             'statusPenjualan' => $statusPenjualan
-            
+
         ];
 
         // dd($data);
@@ -179,7 +178,7 @@ class Edit extends BaseController
             'idpenjualan' => $idpenjualan,
             'idstatus' => $this->request->getVar('update_status')
         ];
-        
+
         // dd($data);
 
         $this->statusPenjualanModel->update($idpenjualan, $data);

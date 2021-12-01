@@ -2,6 +2,13 @@
 
 <?= $this->section('content'); ?>
 <!-- header -->
+<div class="card-body">
+    <?php if (session()->getFlashdata('byr-msg-barang')) : ?>
+    <div class="alert alert-success" role="alert">
+        <?= session()->getFlashdata('byr-msg-barang'); ?>
+    </div>
+    <?php endif; ?>
+</div>
 <div class="container text-center" style="margin-top: 40px;">
     <h5> <span style="color: #FFE500;">Cari Barangmu</span> di sini</h5>
 </div>
@@ -30,11 +37,12 @@
                 <h5><?= $data['nama']; ?></h5>
                 <p> IDR <?= number_format($data['harga']); ?> <br> Stok: <?= $data['stok']; ?> </p>
                 <p><?= $data['keterangan'] ?></p>
-                <div class="btn btn-warning">Beli</div>
+                <a href="/customer/tambah_keranjang/<?= $data['idbarang']; ?>">
+                    <div class="btn btn-warning">+ Keranjang</div>
+                </a>
             </div>
         </div>
         <?php endforeach; ?>
-
     </div>
 </div>
 

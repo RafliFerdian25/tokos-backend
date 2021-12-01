@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use phpDocumentor\Reflection\Types\This;
 
 class BarangModel extends Model
 {
@@ -14,7 +15,7 @@ class BarangModel extends Model
     public function getBarang()
     {
         $db = \Config\Database::connect();
-        $query = $db->query("SELECT barang.idbarang, barang.nama, barang.keterangan, barang.berat, barang.file_gambar, barang.harga, barang.stok, barang.tgl_insert AS tgl_input, barang.tgl_update AS tgl_update FROM barang");
+        $query = $db->query("SELECT barang.idbarang, barang.nama, barang.keterangan, barang.file_gambar, barang.harga, barang.stok, barang.tgl_insert AS tgl_input, barang.tgl_update AS tgl_update FROM barang");
 
         return $query;
     }
@@ -22,15 +23,27 @@ class BarangModel extends Model
     public function getBarangid($idbarang)
     {
         $db = \Config\Database::connect();
-        $query = $db->query("SELECT barang.idbarang, barang.nama, barang.keterangan, barang.berat,  barang.file_gambar, barang.harga, barang.stok, barang.tgl_insert AS tgl_insert, barang.tgl_update AS tgl_update FROM barang WHERE barang.idbarang = " . $idbarang . "");
+        $query = $db->query("SELECT barang.idbarang, barang.nama, barang.keterangan,  barang.file_gambar, barang.harga, barang.stok, barang.tgl_insert AS tgl_insert, barang.tgl_update AS tgl_update FROM barang WHERE barang.idbarang = " . $idbarang . "");
 
         return $query;
     }
-
+    public function getFindId($idbarang)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('barang');
+        $result = $builder->where('idbarang', $idbarang)
+            ->limit(1)
+            ->get('barang');
+        if ($result->getRow() > 0) {
+            return $result->getRow();
+        } else {
+            return array();
+        }
+    }
     public function getSearchBarang($keyword)
     {
         $db = \Config\Database::connect();
-        $query = $db->query("SELECT barang.idbarang, barang.nama, barang.keterangan, barang.berat, barang.file_gambar, barang.harga, barang.stok, barang.tgl_insert AS tgl_input, barang.tgl_update AS tgl_update FROM barang WHERE barang.nama LIKE '%" . $keyword . "%'");
+        $query = $db->query("SELECT barang.idbarang, barang.nama, barang.keterangan, barang.file_gambar, barang.harga, barang.stok, barang.tgl_insert AS tgl_input, barang.tgl_update AS tgl_update FROM barang WHERE barang.nama LIKE '%" . $keyword . "%'");
 
         return $query;
     }

@@ -28,31 +28,28 @@ class Admin extends BaseController
     {
 
 
-        $index = $this->RekapPenjualanModel->findAll();
-        // $index = $query->getResultArray();
         // $index = $this->RekapPenjualanModel->findAll();
-        $total_terjual = $this->RekapPenjualanModel->getTotalPenjualan();
+        $total_terjual = $this->penjualanModel->getTotalBarangJual();
         $total = $total_terjual->getResultArray();
 
         // total pembeli
-        $total_pembelian = $this->RekapPenjualanModel->getPenjualan();
+        $total_pembelian = $this->penjualanModel->getPenjualan();
         $pembeli = $total_pembelian->getResultArray();
 
         //total pendapatan
-        $total_pendapatan = $this->RekapPenjualanModel->getTotalPendapatan();
+        $total_pendapatan = $this->penjualanModel->getTotalPendapatan();
         $pendapatan = $total_pendapatan->getResultArray();
         //terlaris
-        $barangTerlaris = $this->RekapPenjualanModel->getTerlaris();
+        $barangTerlaris = $this->penjualanModel->getTerlaris();
         $terlaris = $barangTerlaris->getResultArray();
 
         //bulanan
-        $bulanan = $this->RekapPenjualanModel->getBulanan();
+        $bulanan = $this->penjualanModel->getBulanan();
         $bulan = $bulanan->getResultArray();
 
         $data = [
             'title' => 'Admin Dashboard | Sumber Jaya Furniture',
-            'index' => $index,
-            'total' => $total,
+            'barangjual' => $total,
             'pembeli' => $pembeli,
             'pendapatan' => $pendapatan,
             'terlaris' => $terlaris,
@@ -60,7 +57,7 @@ class Admin extends BaseController
         ];
         // echo '<pre>';
         // print_r($total_terjual);
-        // dd($terlaris);
+        // dd($total);
         return view('admin/index', $data);
     }
 
@@ -109,7 +106,7 @@ class Admin extends BaseController
             'transaksi' => $transaksi
         ];
 
-
+        // dd($data);
         return view('admin/data_transaksi', $data);
     }
 
@@ -135,7 +132,7 @@ class Admin extends BaseController
 
     public function laporan($bln)
     {
-        $query = $this->RekapPenjualanModel->getRekap($bln);
+        $query = $this->penjualanModel->getRekap($bln);
         $rekap = $query->getResultArray();
         $i = 1;
         $data = [

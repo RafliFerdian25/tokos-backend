@@ -9,5 +9,5 @@ class DetailPenjualanModel extends Model
     protected $table      = 'detail_penjualan';
 
     protected $useAutoIncrement = true;
-    protected $allowedFields = ['idpenjualan','idbarang','qty','harga'];
+    protected $allowedFields = ['idpenjualan', 'idbarang', 'nama_barang', 'qty', 'harga'];
 }

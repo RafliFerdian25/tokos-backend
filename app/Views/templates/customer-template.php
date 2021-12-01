@@ -17,9 +17,15 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
 
+    <link rel="stylesheet" href="/assets/css/atlantis.css">
+
+    <!-- Icons -->
+    <script src="https://kit.fontawesome.com/5fbcc24921.js" crossorigin="anonymous"></script>
+
+
     <!-- Custom -->
     <link rel="stylesheet" href="/assets/css/customerstyle.css">
-    <!-- <link rel="stylesheet" href="/assets/css/tokos-styles.css"> -->
+    <link rel="shortcut icon" href="/assets/img/favicon/favicon.png" type="image/x-icon">
 
     <style>
     @media (max-width: 1024px) {
@@ -48,8 +54,9 @@
                         href="/customer/index">Home</a>
                     <a class="nav-link <?php if ($title == 'Customer Produk | Tokos') : echo 'active';
                                         endif; ?>" href="/customer/produk">Produk</a>
-                    <a class="nav-link <?php if ($title == 'Admin Dashboard | Tokos') : echo 'active';
-                                        endif; ?>" href="keranjang.html">Keranjang</a>
+
+                    <a class="nav-link <?php if ($title == 'Customer Keranjang | Tokos') : echo 'active';
+                                        endif; ?>" href="/customer/keranjang/">Keranjang</a>
                     <a class="nav-link <?php if ($title == 'Admin Dashboard | Tokos') : echo 'active';
                                         endif; ?>" href="profile.html">Profile</a>
                 </div>
@@ -80,19 +87,113 @@
             <p style="padding: 2vh 0;font-size: 1vw;"> Tokos Copyright © 2021 Toko Anak Kos Tembalang.</p>
         </div>
     </footer>
+
+    <!-- Script -->
+
+    <!-- Navbar scroll -->
+    <script src="navbar.js">
+    </script>
+
+
+    <!--   Core JS Files   -->
+    <script src="/assets/js/core/jquery.3.2.1.min.js"></script>
+    <script src="/assets/js/core/popper.min.js"></script>
+    <script src="/assets/js/core/bootstrap.min.js"></script>
+
+    <!-- jQuery UI -->
+    <script src="/assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+    <script src="/assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+
+    <!-- Bootstrap Toggle -->
+    <script src="/assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
+
+    <!-- jQuery Scrollbar -->
+    <script src="/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+
+    <!-- Datatables -->
+    <script src="/assets/js/plugin/datatables/datatables.min.js"></script>
+
+    <!-- Atlantis JS -->
+    <script src="/assets/js/atlantis.min.js"></script>
+
+    <!-- DATA BARANG SCRIPTS -->
+    <!-- Atlantis DEMO methods, don't include it in your project! -->
+    <script src="/assets/js/setting-demo2.js"></script>
+
+    <!-- Datatables -->
+    <script src="/assets/js/plugin/datatables/datatables.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('#basic-datatables').DataTable({});
+
+        $('#multi-filter-select').DataTable({
+            "pageLength": 5,
+            initComplete: function() {
+                this.api().columns().every(function() {
+                    var column = this;
+                    var select = $(
+                            '<select class="form-control"><option value=""></option></select>'
+                        )
+                        .appendTo($(column.footer()).empty())
+                        .on('change', function() {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+
+                            column
+                                .search(val ? '^' + val + '$' : '', true, false)
+                                .draw();
+                        });
+
+                    column.data().unique().sort().each(function(d, j) {
+                        select.append('<option value="' + d + '">' + d +
+                            '</option>')
+                    });
+                });
+            }
+        });
+
+        // Add Row
+        $('#add-row').DataTable({
+            "pageLength": 5,
+        });
+
+        var action =
+            '<td> <div class="form-button-action"> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Lihat dan Edit"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Hapus"> <i class="far fa-trash-alt"></i> </button> </div> </td>';
+
+        $('#addRowButton').click(function() {
+            $('#add-row').dataTable().fnAddData([
+                $("#addName").val(),
+                $("#addPosition").val(),
+                $("#addOffice").val(),
+                action
+            ]);
+            $('#addRowModal').modal('hide');
+
+        });
+
+
+        $('#add-row2').DataTable({
+            "pageLength": 5,
+        });
+
+        var action =
+            '<td> <div class="form-button-action"> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Lihat dan Edit"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Hapus"> <i class="far fa-trash-alt"></i> </button> </div> </td>';
+
+        $('#addRowButton').click(function() {
+            $('#add-row2').dataTable().fnAddData([
+                $("#addName").val(),
+                $("#addPosition").val(),
+                $("#addOffice").val(),
+                action
+            ]);
+            $('#addRowModal').modal('hide');
+
+        });
+    });
+    </script>
+
 </body>
-<!-- Navbar scroll -->
-<script>
-var prevScrollpos = window.pageYOffset;
-window.onscroll = function() {
-    var currentScrollPos = window.pageYOffset;
-    if (prevScrollpos > currentScrollPos) {
-        document.getElementById("navbar").style.top = "0";
-    } else {
-        document.getElementById("navbar").style.top = "-100px";
-    }
-    prevScrollpos = currentScrollPos;
-}
-</script>
+
 
 </html>
