@@ -13,6 +13,8 @@ class Tambah extends BaseController
         $this->barangModel = new BarangModel();
     }
 
+    /*****************************  Barang  ******************************** */
+
     public function tambah()
     {
         //$kategori = $this->kategoriModel->findAll();

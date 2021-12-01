@@ -25,6 +25,7 @@ class Edit extends BaseController
         $this->statusPenjualanModel = new StatusPenjualanModel();
     }
 
+    /*****************************  Barang  ******************************** */
     public function barang($idbarang)
     {
         $query = $this->barangModel->getBarangid($idbarang);
@@ -44,54 +45,6 @@ class Edit extends BaseController
 
         return view('admin/edit/form-edit-barang', $data);
     }
-
-
-
-    public function kategori($idkategori)
-    {
-        $datakategori = $this->kategoriModel->getKategori($idkategori);
-        $data = [
-            'title' => 'Form Edit Kategori | Sumber Jaya Furniture',
-            'data' => $datakategori
-        ];
-
-        return view('admin/edit/form-edit-kategori', $data);
-    }
-
-    public function detailhapuskategori($idkategori)
-    {
-        $datakategori = $this->kategoriModel->getKategori($idkategori);
-        $data = [
-            'title' => 'Hapus Kategori | Sumber Jaya Furniture',
-            'data' => $datakategori
-        ];
-
-        return view('admin/delete/form-delete-kategori', $data);
-    }
-
-
-    public function hapuskategori($idkategori)
-    {
-        $this->kategoriModel->delete($idkategori);
-
-        session()->setFlashdata('delete-msg-kategori', 'Data Kategori berhasil dihapus.');
-
-        return redirect()->to('/admin/barang');
-    }
-
-    public function editkategori($idkategori)
-    {
-        $data = [
-            'idkategori' => $idkategori,
-            'nama' => $this->request->getVar('namaKategori')
-        ];
-        $this->kategoriModel->update($idkategori, $data);
-
-        session()->setFlashdata('edit-msg-kategori', 'Data Kategori berhasil diubah.');
-
-        return redirect()->to('/admin/barang');
-    }
-
     public function detailhapusbarang($idbarang)
     {
         $query = $this->barangModel->getBarangid($idbarang);
@@ -115,8 +68,6 @@ class Edit extends BaseController
 
         return redirect()->to('/admin/barang');
     }
-
-
 
     public function editbarang($idbarang)
     {
@@ -151,6 +102,7 @@ class Edit extends BaseController
         return redirect()->to('/admin/barang');
     }
 
+    /*****************************  Penjualan  ******************************** */
     public function transaksi($idpenjualan)
     {
         $query = $this->penjualanModel->getDataTransaksi($idpenjualan);

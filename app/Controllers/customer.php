@@ -44,6 +44,7 @@ class Customer extends BaseController
         helper('form');
         return view('customer/index', $data);
     }
+    /*****************************  Barang  ******************************** */
     public function produk()
     {
         $query = $this->barangModel->getBarang();
@@ -121,7 +122,7 @@ class Customer extends BaseController
         // dd($qty);
         return redirect()->to('/Customer/keranjang');
     }
-    /************************** PEMBAYARAN **************************** */
+    /************************** penjualan **************************** */
     public function pembayaran()
     {
         $cart = \Config\Services::cart();

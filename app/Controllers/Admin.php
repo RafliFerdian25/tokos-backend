@@ -23,7 +23,7 @@ class Admin extends BaseController
         $this->penjualanModel = new PenjualanModel();
         $this->RekapPenjualanModel = new RekapPenjualanModel();
     }
-
+    // *********************** Penjualan **********************************/
     public function index()
     {
 
@@ -60,7 +60,35 @@ class Admin extends BaseController
         // dd($total);
         return view('admin/index', $data);
     }
+    public function transaksi()
+    {
+        $query = $this->penjualanModel->getTransaksi();
+        $transaksi = $query->getResultArray();
 
+        $data = [
+            'title' => 'Data Transaksi | Sumber Jaya Furniture',
+            'transaksi' => $transaksi
+        ];
+
+        // dd($data);
+        return view('admin/data_transaksi', $data);
+    }
+
+    public function laporan($bln)
+    {
+        $query = $this->penjualanModel->getRekap($bln);
+        $rekap = $query->getResultArray();
+        $i = 1;
+        $data = [
+            'title' => 'Detail Barang | Sumber Jaya Furniture',
+            'i' => $i,
+            'rekap' => $rekap
+        ];
+        // dd($data);
+        return view('admin/laporan-bulanan', $data);
+    }
+
+    /*****************************  Barang  ******************************** */
     public function barang()
     {
         $query = $this->barangModel->getBarang();
@@ -96,19 +124,6 @@ class Admin extends BaseController
         return view('admin/search', $data);
     }
 
-    public function transaksi()
-    {
-        $query = $this->penjualanModel->getTransaksi();
-        $transaksi = $query->getResultArray();
-
-        $data = [
-            'title' => 'Data Transaksi | Sumber Jaya Furniture',
-            'transaksi' => $transaksi
-        ];
-
-        // dd($data);
-        return view('admin/data_transaksi', $data);
-    }
 
     public function detail($idbarang)
     {
@@ -128,19 +143,5 @@ class Admin extends BaseController
         // dd($data);
 
         return view('admin/detail-barang', $data);
-    }
-
-    public function laporan($bln)
-    {
-        $query = $this->penjualanModel->getRekap($bln);
-        $rekap = $query->getResultArray();
-        $i = 1;
-        $data = [
-            'title' => 'Detail Barang | Sumber Jaya Furniture',
-            'i' => $i,
-            'rekap' => $rekap
-        ];
-        // dd($rekap);
-        return view('admin/laporan-bulanan', $data);
     }
 }

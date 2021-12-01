@@ -33,10 +33,10 @@ class PenjualanModel extends Model
     public function getRekap($bln)
     {
         $db = \Config\Database::connect();
-        $query = $db->query("SELECT barang.nama AS namaBarang, MONTH(rekap_penjualan.tgl_input) AS bulan, SUM(rekap_penjualan.jumlah) AS jumlah, rekap_penjualan.harga_satuan AS hargaSatuan, SUM(rekap_penjualan.total_penjualan) AS totalPenjualan
-        FROM (rekap_penjualan JOIN barang ON rekap_penjualan.idbarang = barang.idbarang)
-        WHERE MONTH(rekap_penjualan.tgl_input) = " . $bln . "
-        GROUP BY barang.nama");
+        $query = $db->query("SELECT detail_penjualan.nama_barang AS namaBarang, MONTH(penjualan.tgl_penjualan) AS bulan, SUM(detail_penjualan.qty) AS jumlah, detail_penjualan.harga AS hargaSatuan, SUM(penjualan.total_harga) AS totalPenjualan
+        FROM penjualan JOIN detail_penjualan ON penjualan.idpenjualan = detail_penjualan.idpenjualan
+        WHERE MONTH(penjualan.tgl_penjualan)  = " . $bln . "
+        GROUP BY detail_penjualan.nama_barang");
 
         return $query;
     }
