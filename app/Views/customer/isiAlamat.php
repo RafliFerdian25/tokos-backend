@@ -12,16 +12,18 @@
     <form method="post" action="/customer/invoice" id="formalamat" enctype="multipart/form-data">
         <div class="nama">
             <label for="nama" class="my-2">Nama</label><br>
-            <input class="input-nama w-100 p-2 form-control" type="text" name="nama" id="nama" required>
+            <input class="input-nama w-100 p-2 form-control" type="text" name="nama" id="nama"
+                value="<?= $pelanggan->fullname; ?>" required>
         </div>
         <div class="nohp">
             <label for="nohp" class="my-2">No.Hp</label><br>
-            <input class="input-nama w-100 p-2 form-control" type="number" name="noHp" id="noHp" required>
+            <input class="input-nama w-100 p-2 form-control" type="number" name="noHp" id="noHp"
+                value="<?= $pelanggan->noHp; ?>" required>
         </div>
         <div class="alamat">
             <label for="alamat" class="my-2">Alamat</label><br>
             <textarea class="input-alamat w-100 form-control" name="alamat" id="alamat" cols="30" rows="10"
-                required></textarea>
+                required><?= $pelanggan->alamat; ?></textarea>
         </div>
         <div class="metode__pembayaran" onchange="set_alamat()">
             <label for="metode__pembayaran" class="my-2">Metode Pembayaran</label>

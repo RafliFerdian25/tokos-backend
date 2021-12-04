@@ -3,8 +3,8 @@
 <?= $this->section('content'); ?>
 <!-- header -->
 <div class="container text-center" style="margin-top: 40px;">
-    <h5> <span style="color: #FFE500;font-weight: 700;">Keranjang</span><img style="height: 4rem;"
-            src="images/keranjang.png" alt=""></h5>
+    <h1> <span style="color: #FFE500;font-weight: 700;">Keranjang</span><img style="height: 4rem;"
+            src="images/keranjang.png" alt=""></h1>
 </div>
 
 <!-- main -->
@@ -18,7 +18,6 @@
                         <h4 class="card-title">Data Barang</h4>
                     </div>
                 </div>
-
                 <div class="card-body">
                     <div class="table-responsive">
                         <table id="add-row" class="display table table-striped table-hover">
@@ -44,9 +43,9 @@
                                         <div class="form-button-action">
                                             <?php
                                                 $rowid =  $data['rowid'];
+                                                // echo $rowid;
                                                 $qty = $data['qty']; ?>
-                                            <a href="/customer/kurangi_produk_keranjang/<?= $rowid . '/' . $qty; ?>"
-                                                class="d-flex">
+                                            <a href="/customer/kurangi_produk_keranjang/<?= $rowid ?>" class="d-flex">
                                                 <button type="button" data-toggle="tooltip" title=""
                                                     class="btn btn-link btn-danger btn-lg"
                                                     data-original-title="Mnegurangi">

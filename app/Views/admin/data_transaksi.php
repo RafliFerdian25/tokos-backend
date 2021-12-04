@@ -28,7 +28,11 @@
                         </div>
                         <div class="card-body">
                             <!-- alert kelola kategori -->
-                            <?php if (session()->getTempdata('edit-msg-transaksi')) : ?>
+                            <?php
+
+                            use function PHPUnit\Framework\stringContains;
+
+                            if (session()->getTempdata('edit-msg-transaksi')) : ?>
                             <div class="alert alert-success" role="alert">
                                 <?= session()->getTempdata('edit-msg-transaksi'); ?>
                             </div>
@@ -44,8 +48,10 @@
                                             <th>Nama Pembeli</th>
                                             <th>Jumlah</th>
                                             <th>Harga Total</th>
+                                            <th>Alamat</th>
+                                            <th>No Telepon</th>
                                             <th>Status</th>
-                                            <th>Update Status</th>
+                                            <th colspan="2">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -57,16 +63,19 @@
                                             <td><?= $data['nama_pembeli']; ?></td>
                                             <th><?= $data['jumlah']; ?></th>
                                             <th><?= $data['harga_total']; ?></th>
+                                            <th><?= $data['alamat_kirim']; ?></th>
+                                            <th>0<?= $data['noHp'];  ?></th>
                                             <td><span class="badge <?php if ($data['status'] == 'Sukses') {
-																			echo 'badge-success';
-																		} elseif ($data['status'] == 'Dikirim') {
-																			echo 'badge-primary';
-																		} elseif ($data['status'] == 'Belum Transfer') {
-																			echo 'badge-warning';
-																		} elseif ($data['status'] == 'Dibatalkan') {
-																			echo 'badge-danger';
-																		} ?>" <?php if ($data['status'] == 'Belum Dikirim') : echo 'style="background-color : grey;"';
-																endif; ?>><?= $data['status']; ?></span></td>
+                                                                            echo 'badge-success';
+                                                                        } elseif ($data['status'] == 'Dikirim') {
+                                                                            echo 'badge-primary';
+                                                                        } elseif ($data['status'] == 'Belum Transfer') {
+                                                                            echo 'badge-warning';
+                                                                        } elseif ($data['status'] == 'Dibatalkan') {
+                                                                            echo 'badge-danger';
+                                                                        } ?>"
+                                                    <?php if ($data['status'] == 'Belum Dikirim') : echo 'style="background-color : grey;"';
+                                                                                endif; ?>><?= $data['status']; ?></span></td>
                                             <td style="text-align: center;">
                                                 <a href="/edit/transaksi/<?= $data['idpenjualan']; ?>">
                                                     <button type="button" class="btn">

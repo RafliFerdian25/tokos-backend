@@ -17,6 +17,7 @@ class Customer extends BaseController
     protected $penjualanModel;
     protected $RekapPenjualanModel;
     protected $DetailPenjualanModel;
+    protected $UsersModel;
 
     public function __construct()
     {
@@ -25,6 +26,8 @@ class Customer extends BaseController
         $this->penjualanModel = new PenjualanModel();
         $this->RekapPenjualanModel = new RekapPenjualanModel();
         $this->DetailPenjualanModel = new DetailPenjualanModel();
+        $this->db = \Config\Database::connect();
+        $UsersModel = new \Myth\Auth\Models\UserModel();
     }
 
     public function index()
@@ -103,6 +106,10 @@ class Customer extends BaseController
             'cart' => $cart,
             'keranjang' => $keranjang
         ];
+        // foreach ($keranjang as $data) {
+        //     $po = $data['rowid'];
+        // }
+        // dd($po);
         return view('customer/keranjang', $data);
     }
     public function hapus_keranjang($rowid)
@@ -114,12 +121,17 @@ class Customer extends BaseController
     public function kurangi_produk_keranjang($rowid)
     {
         $cart = \Config\Services::cart();
-        // $qty = $qty--;
-        $cart->update(array(
-            'rowid'   => $rowid,
-            'qty'     => 1
-        ));
-        // dd($qty);
+        $row = (string)$rowid;
+        $cart_row = $cart->contents($rowid);
+        $qty_row = $cart_row[$row]['qty'];
+        if ($qty_row > 1) {
+            $cart->update(array(
+                'rowid'   => $rowid,
+                'qty'     => $qty_row - 1
+            ));
+        } else {
+            $cart->remove($rowid);
+        }
         return redirect()->to('/Customer/keranjang');
     }
     /************************** penjualan **************************** */
@@ -127,12 +139,15 @@ class Customer extends BaseController
     {
         $cart = \Config\Services::cart();
         $keranjang = $cart->contents();
-
+        // $this->builder = $this->db->table('users');
+        // $pelanggan = $this->builder->get();
         $data = [
             'title' => 'Customer Keranjang | Tokos',
             'cart' => $cart,
-            'keranjang' => $keranjang
+            'keranjang' => $keranjang,
+            'pelanggan' => user()
         ];
+        // dd($pelanggan);
         return view('customer/isiAlamat', $data);
     }
     public function invoice()
@@ -143,14 +158,14 @@ class Customer extends BaseController
 
         $image = $this->request->getFile('image');
         if ($image->getError() == 4) {
-            $namaImage = 'chair-prod.png';
+            $namaImage = '';
         } else {
             $namaImage = $image->getName();
-            $image->move('assets/img/productimg');
+            $image->move('assets/img/bukti');
         }
 
         $invoice = array(
-            'idpelanggan'     => 1,
+            'idpelanggan'     => user_id(),
             'total_harga'     => $cart->total(),
             'total_item'      => $cart->totalItems(),
             'nama_kirim'      => $this->request->getVar('nama'),
@@ -171,12 +186,93 @@ class Customer extends BaseController
                 'harga'             => $item['price']
             );
             $this->DetailPenjualanModel->insert($data);
+            $query = $this->barangModel->getBarangid($item['id']);
+            $barang = $query->getResultArray();
+            // dd($barang);
+            $setbarang = array(
+                'idbarang'  => $barang[0]['idbarang'],
+                'stok'      => $barang[0]['stok'] - $item['qty']
+            );
+            $this->barangModel->update($barang[0]['idbarang'], $setbarang);
         }
         // dd($image);
         // dd($invoice);
         // dd($data);
+        // dd($setbarang);
         $cart->destroy();
         session()->setFlashdata('byr-msg-barang', 'Selamat Pesanan Anda Telah Berhasil Diproses.');
         return redirect()->to("customer/produk");
+    }
+
+    /***************************** PROFILE *************************************/
+    public function profile()
+    {
+        $data = [
+            'title' => 'Customer Profile | Tokos',
+            'pelanggan' => user()
+        ];
+        return view('customer/profile', $data);
+    }
+    public function detail_ubah_profile()
+    {
+        $data = [
+            'title' => 'Customer Profile | Tokos',
+            'pelanggan' => user()
+        ];
+        return view('customer/ubahdata', $data);
+    }
+    public function ubah_profile($id)
+    {
+        $image = $this->request->getFile('image');
+        // dd($namaImage);
+        if ($image->getError() == 4) { //user tidak upload file
+            $namaImage = $this->request->getVar('imageLama');
+        } else { //jika user upload file baru
+            //mengambil nama file gambar
+            $namaImage = $image->getName();
+            //pindahkan letak file
+            $image->move('assets/img', $namaImage);
+            //hapus file lama
+            if ($this->request->getVar('imageLama') != "default.svg") {
+                unlink('assets/img/' . $this->request->getVar('imageLama'));
+            }
+        }
+        $profile = array(
+            'fullname'     => $this->request->getVar('nama'),
+            'alamat'       => $this->request->getVar('alamat'),
+            'noHp'         => $this->request->getVar('noHp'),
+            'user_image'   => $namaImage
+        );
+        $builder = $this->db->table('users');
+        $builder->update($profile, "id = $id");
+        // dd($profile);
+
+        return redirect()->to('customer/profile');
+    }
+
+    public function riwayat_transaksi($idpelanggan)
+    {
+        $query = $this->penjualanModel->getDataTransaksiCustomer($idpelanggan);
+        $transaksi = $query->getResultArray();
+
+        $data = [
+            'title' => 'Customer Profile | Tokos',
+            'pelanggan' => user(),
+            'transaksi' => $transaksi
+        ];
+        return view('customer/transaksi', $data);
+    }
+    public function detail_riwayat_transaksi($idpenjualan)
+    {
+        $query = $this->DetailPenjualanModel->getDataTransaksi($idpenjualan);
+        $transaksi = $query->getResultArray();
+        $i = 1;
+        $data = [
+            'title' => 'Customer Profile | Tokos',
+            'pelanggan' => user(),
+            'transaksi' => $transaksi,
+            'i'         => $i
+        ];
+        return view('customer/detail_transaksi', $data);
     }
 }

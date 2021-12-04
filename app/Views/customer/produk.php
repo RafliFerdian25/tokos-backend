@@ -10,7 +10,7 @@
     <?php endif; ?>
 </div>
 <div class="container text-center" style="margin-top: 40px;">
-    <h5> <span style="color: #FFE500;">Cari Barangmu</span> di sini</h5>
+    <h1> <span style="color: #FFE500;">Cari Barangmu</span> di sini</h1>
 </div>
 <div class="inputbarang w-75 mx-auto">
     <div class="input-group mb-3">

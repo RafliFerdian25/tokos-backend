@@ -74,3 +74,23 @@ footer {
 }
 
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap");
+
+/* ********************************************   PROFILE   ******************************************** */
+.ubah__porfile .btn-primary, .data__profile .btn-primary{
+	background: #767672 !important;
+	border: #ffffff !important;
+	color: #ffffff !important;
+}
+.ubah__porfile .form-control-file{
+  background-color: #767672;
+}
+.data__profile{
+  font-size: 18px;
+}
+.data__profile table tr td{
+  padding: 10px;
+}
+.data__profile a{
+  margin-right: 5px;
+  text-decoration: none;
+}

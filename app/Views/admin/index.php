@@ -104,12 +104,14 @@
                         <div class="card-body pb-0">
 
                             <!-- top sale -->
+                            <?php $i = 1; ?>
                             <?php foreach ($terlaris as $terlaris) : ?>
                             <div class="separator-dashed"></div>
                             <div class="d-flex">
-                                <div class="avatar">
-                                    <img src="assets/img/logoproduct3.svg" alt="..." class="avatar-img rounded-circle">
-                                </div>
+                                <avatar>
+                                    <img src="<?= base_url(); ?>/assets/img/favicon/<?= $i++; ?>.png" alt="..."
+                                        class="avatar-img rounded-circle">
+                                </avatar>
                                 <div class="flex-1 pt-1 ml-2">
                                     <h6 class="fw-bold mb-1"><?= $terlaris['namaBarang']; ?></h6>
                                 </div>
@@ -138,7 +140,7 @@
                                             <th scope="col">Bulan</th>
                                             <th scope="col">Jumlah</th>
                                             <th scope="col">Total Penjualan</th>
-                                            <th scope="col">Action</th>
+                                            <th scope="col">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>

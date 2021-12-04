@@ -6,6 +6,7 @@ namespace App\Controllers;
 use App\Models\BarangModel;
 use App\Models\PenjualanModel;
 use App\Models\RekapPenjualanModel;
+use App\Models\DetailPenjualanModel;
 
 use function PHPUnit\Framework\throwException;
 
@@ -15,6 +16,7 @@ class Admin extends BaseController
     protected $barangModel;
     protected $penjualanModel;
     protected $RekapPenjualanModel;
+    protected $DetailPenjualanModel;
 
     public function __construct()
     {
@@ -22,6 +24,7 @@ class Admin extends BaseController
         $this->barangModel = new BarangModel();
         $this->penjualanModel = new PenjualanModel();
         $this->RekapPenjualanModel = new RekapPenjualanModel();
+        $this->DetailPenjualanModel = new DetailPenjualanModel();
     }
     // *********************** Penjualan **********************************/
     public function index()
@@ -129,19 +132,25 @@ class Admin extends BaseController
     {
         $query = $this->barangModel->getBarangid($idbarang);
         $barang = $query->getResultArray();
-        // $kategori = $this->kategoriModel->findAll();
 
         // dd($barang);
 
         $data = [
             'title' => 'Form Edit Barang | Sumber Jaya Furniture',
             'barang' => $barang
-            // 'kategori' => $kategori
 
         ];
 
         // dd($data);
 
         return view('admin/detail-barang', $data);
+    }
+    public function login1()
+    {
+        return view("auth/login");
+    }
+    public function regis1()
+    {
+        return view("auth/register");
     }
 }

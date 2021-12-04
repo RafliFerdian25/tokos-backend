@@ -16,7 +16,7 @@ class PenjualanModel extends Model
     public function getTransaksi()
     {
         $db = \Config\Database::connect();
-        $query = $db->query("SELECT penjualan.idpenjualan AS 'idpenjualan', penjualan.tgl_penjualan AS 'tgl_penjualan', pelanggan.nama AS 'nama_pembeli', penjualan.total_item AS jumlah, penjualan.total_harga AS 'harga_total', status.nama AS 'status' FROM (((penjualan  JOIN pelanggan ON penjualan.idpelanggan = pelanggan.idpelanggan) JOIN status_penjualan ON penjualan.idpenjualan = status_penjualan.idpenjualan) JOIN status ON status_penjualan.idstatus = status.idstatus) ORDER BY penjualan.idpenjualan;");
+        $query = $db->query("SELECT penjualan.idpenjualan AS 'idpenjualan', penjualan.tgl_penjualan AS 'tgl_penjualan', users.fullname AS 'nama_pembeli', penjualan.total_item AS jumlah, penjualan.total_harga AS 'harga_total', status.nama AS 'status', penjualan.alamat_kirim, penjualan.noHp FROM (((penjualan  JOIN users ON penjualan.idpelanggan = users.id) JOIN status_penjualan ON penjualan.idpenjualan = status_penjualan.idpenjualan) JOIN status ON status_penjualan.idstatus = status.idstatus) ORDER BY penjualan.idpenjualan;");
 
         return $query;
     }
@@ -24,7 +24,14 @@ class PenjualanModel extends Model
     public function getDataTransaksi($idpenjualan)
     {
         $db = \Config\Database::connect();
-        $query = $db->query("SELECT penjualan.idpenjualan AS idpenjualan, penjualan.tgl_penjualan AS tgl_penjualan, barang.nama AS nama_barang, pelanggan.nama AS nama_pembeli, penjualan.total_item AS jumlah, penjualan.total_harga AS harga_total, status.nama AS 'status' FROM (((((penjualan JOIN detail_penjualan ON penjualan.idpenjualan = detail_penjualan.idpenjualan) JOIN barang ON detail_penjualan.idbarang = barang.idbarang) JOIN pelanggan ON penjualan.idpelanggan = pelanggan.idpelanggan) JOIN status_penjualan ON penjualan.idpenjualan = status_penjualan.idpenjualan) JOIN status ON status_penjualan.idstatus = status.idstatus) WHERE penjualan.idpenjualan = '" . $idpenjualan . "'");
+        $query = $db->query("SELECT penjualan.idpenjualan AS idpenjualan, penjualan.tgl_penjualan AS tgl_penjualan, barang.nama AS nama_barang, penjualan.nama_kirim, penjualan.noHp, penjualan.alamat_kirim, penjualan.total_item AS jumlah, penjualan.total_harga AS harga_total, penjualan.bukti_bayar, penjualan.metode_pembayaran, status.nama AS 'status' FROM (((((penjualan JOIN detail_penjualan ON penjualan.idpenjualan = detail_penjualan.idpenjualan) JOIN barang ON detail_penjualan.idbarang = barang.idbarang) JOIN users ON penjualan.idpelanggan = users.id) JOIN status_penjualan ON penjualan.idpenjualan = status_penjualan.idpenjualan) JOIN status ON status_penjualan.idstatus = status.idstatus) WHERE penjualan.idpenjualan = '" . $idpenjualan . "' GROUP BY penjualan.idpenjualan");
+        // $transaksi = $this->$query->where(['idpenjualan' => $idpenjualan])->first();
+        return $query;
+    }
+    public function getDataTransaksiCustomer($idpelanggan)
+    {
+        $db = \Config\Database::connect();
+        $query = $db->query("SELECT penjualan.idpenjualan AS idpenjualan, penjualan.tgl_penjualan AS tgl_penjualan, penjualan.total_item AS jumlah, penjualan.total_harga AS harga_total, status.nama AS 'status' FROM ((((penjualan JOIN detail_penjualan ON penjualan.idpenjualan = detail_penjualan.idpenjualan) JOIN users ON penjualan.idpelanggan = users.id) JOIN status_penjualan ON penjualan.idpenjualan = status_penjualan.idpenjualan) JOIN status ON status_penjualan.idstatus = status.idstatus) WHERE penjualan.idpelanggan = '" . $idpelanggan . "' GROUP by penjualan.idpenjualan order by penjualan.tgl_penjualan");
         // $transaksi = $this->$query->where(['idpenjualan' => $idpenjualan])->first();
         return $query;
     }

@@ -48,17 +48,19 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" style="height: 3vw;" id="navbarNavAltMarkup">
                 <div class=" navbar-nav" style="display: flex;">
-                    <a href="/admin/index">Pindah</a>
                     <a class="nav-link <?php if ($title == 'Customer Dashboard | Tokos') : echo 'active';
                                         endif; ?>" style="font-weight: 700; font-size: large;"
                         href="/customer/index">Home</a>
                     <a class="nav-link <?php if ($title == 'Customer Produk | Tokos') : echo 'active';
-                                        endif; ?>" href="/customer/produk">Produk</a>
+                                        endif; ?>" style="font-weight: 700; font-size: large;"
+                        href="/customer/produk">Produk</a>
 
                     <a class="nav-link <?php if ($title == 'Customer Keranjang | Tokos') : echo 'active';
-                                        endif; ?>" href="/customer/keranjang/">Keranjang</a>
-                    <a class="nav-link <?php if ($title == 'Admin Dashboard | Tokos') : echo 'active';
-                                        endif; ?>" href="profile.html">Profile</a>
+                                        endif; ?>" style="font-weight: 700; font-size: large;"
+                        href="/customer/keranjang/">Keranjang</a>
+                    <a class="nav-link <?php if ($title == 'Customer Profile | Tokos') : echo 'active';
+                                        endif; ?>" style="font-weight: 700; font-size: large;"
+                        href="/customer/profile">Profile</a>
                 </div>
             </div>
         </div>

@@ -7,6 +7,9 @@ use App\Models\BarangModel;
 use App\Models\PenjualanModel;
 use App\Models\StatusModel;
 use App\Models\StatusPenjualanModel;
+use App\Models\DetailPenjualanModel;
+use CodeIgniter\I18n\Time;
+
 
 class Edit extends BaseController
 {
@@ -15,14 +18,18 @@ class Edit extends BaseController
     protected $penjualanModel;
     protected $statusModel;
     protected $statusPenjualanModel;
+    protected $myTime;
+    protected $DetailPenjualanModel;
 
     public function __construct()
     {
-        //$this->kategoriModel = new KategoriModel();
+        $myTime = new Time('now', 'Asia/Jakarta');
         $this->barangModel = new BarangModel();
         $this->penjualanModel = new PenjualanModel();
         $this->statusModel = new StatusModel();
         $this->statusPenjualanModel = new StatusPenjualanModel();
+        $this->DetailPenjualanModel = new DetailPenjualanModel();
+        helper('date');
     }
 
     /*****************************  Barang  ******************************** */
@@ -72,6 +79,7 @@ class Edit extends BaseController
     public function editbarang($idbarang)
     {
         $image = $this->request->getFile('image');
+
         if ($image->getError() == 4) { //user tidak upload file
             $namaImage = $this->request->getVar('imageLama');
         } else { //jika user upload file baru
@@ -82,15 +90,19 @@ class Edit extends BaseController
             //hapus file lama
             unlink('assets/img/productimg/' . $this->request->getVar('imageLama'));
         }
+        // date_default_timezone_set('Asia/Jakarta');
+        $tgl_update = Time::now('Asia/Jakarta');
+        $tgl = $tgl_update->toDateTimeString();
+
+        // dd($tgl);
         $data = [
             'idbarang' => $idbarang,
             'nama' => $this->request->getVar('nama'),
-            'idkategori' => $this->request->getVar('idkategori'),
             'stok' => $this->request->getVar('stok'),
             'harga' => $this->request->getVar('harga'),
-            'berat' => $this->request->getVar('berat'),
             'keterangan' => $this->request->getVar('keterangan'),
-            'file_gambar' => $namaImage
+            'file_gambar' => $namaImage,
+            'tgl_update'    => $tgl
         ];
 
 
@@ -107,15 +119,16 @@ class Edit extends BaseController
     {
         $query = $this->penjualanModel->getDataTransaksi($idpenjualan);
         $transaksi = $query->getResultArray();
+        $detail_query = $this->DetailPenjualanModel->getDataTransaksi($idpenjualan);
+        $detail = $detail_query->getResultArray();
         $status = $this->statusModel->findAll();
         $statusPenjualan = $this->statusPenjualanModel->findAll();
-
-
         $data = [
             'title' => 'Form Edit Barang | Sumber Jaya Furniture',
             'transaksi' => $transaksi,
             'status' => $status,
-            'statusPenjualan' => $statusPenjualan
+            'statusPenjualan' => $statusPenjualan,
+            'detail'            => $detail
 
         ];
 
@@ -130,14 +143,8 @@ class Edit extends BaseController
             'idpenjualan' => $idpenjualan,
             'idstatus' => $this->request->getVar('update_status')
         ];
-
-        // dd($data);
-
         $this->statusPenjualanModel->update($idpenjualan, $data);
-
         session()->setTempdata('edit-msg-transaksi', 'Status berhasil diubah.', 1);
-
-        // dd($data);
         return redirect()->to('/admin/transaksi');
     }
 }

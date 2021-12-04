@@ -5,12 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title><?= $title; ?></title>
     <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-    <link rel="icon" href="/assets/img/favicon-sfj.ico" type="image/x-icon" />
+    <link rel="icon" href="<?= base_url(); ?>/assets/img/favicon/favicon.png" type="image/x-icon" />
 
     <!-- Fonts and icons -->
     <script src="assets/js/plugin/webfont/webfont.min.js"></script>
     <script src="https://kit.fontawesome.com/5fbcc24921.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/assets/fonts/flaticon/flaticon.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>/assets/fonts/flaticon/flaticon.css">
     <script>
     WebFont.load({
         google: {
@@ -49,15 +49,16 @@
             <div class="logo-header" data-background-color="tokos">
 
                 <a href="/" class="logo mx-auto">
-                    <img src="/assets/img/tokos.png" alt="navbar brand" class="navbar-brand" style="height: 50px;">
+                    <img src="<?= base_url(); ?>/assets/img/tokos.png" alt="navbar brand" class="navbar-brand"
+                        style="height: 50px;">
                 </a>
                 <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
                     data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon">
-                        <i class="icon-menu"></i>
+                        <i class="fas fa-bars"></i>
                     </span>
                 </button>
-                <button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
+                <button class="topbar-toggler more"><i class="fas fa-ellipsis-v"></i></button>
                 <div class="nav-toggle">
                     <button class="btn btn-toggle toggle-sidebar">
                         <i class="fas fa-bars"></i>
@@ -69,18 +70,6 @@
             <nav class="navbar navbar-header navbar-expand-lg" data-background-color="tokos2">
 
                 <div class="container-fluid">
-                    <!-- <div class="collapse" id="search-nav">
-                        <form class="navbar-left navbar-form nav-search mr-md-3">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <button type="submit" class="btn btn-search pr-1">
-                                        <i class="fa fa-search search-icon"></i>
-                                    </button>
-                                </div>
-                                <input type="text" placeholder="Search ..." class="form-control">
-                            </div>
-                        </form>
-                    </div> -->
 
                     <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
                         <li class="nav-item toggle-nav-search hidden-caret">
@@ -139,18 +128,20 @@
                             <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"
                                 aria-expanded="false">
                                 <div class="avatar-sm">
-                                    <img src="/assets/img/ava-musa.jpg" alt="..." class="avatar-img rounded-circle">
+                                    <img src="<?= base_url(); ?>/assets/img/<?= user()->user_image; ?>" alt="..."
+                                        class="avatar-img rounded-circle">
                                 </div>
                             </a>
                             <ul class="dropdown-menu dropdown-user animated fadeIn">
                                 <div class="dropdown-user-scroll scrollbar-outer">
                                     <li>
                                         <div class="user-box">
-                                            <div class="avatar-lg"><img src="/assets/img/ava-musa.jpg"
+                                            <div class="avatar-lg"><img
+                                                    src="<?= base_url(); ?>/assets/img/<?= user()->user_image; ?>"
                                                     alt="image profile" class="avatar-img rounded"></div>
                                             <div class="u-text">
-                                                <h4>Musa</h4>
-                                                <p class="text-muted">musaalfianmaulana@students.undip.ac.id</p>
+                                                <h4><?= user()->fullname; ?></h4>
+                                                <p class="text-muted"><?= user()->email; ?></p>
                                             </div>
                                         </div>
                                     </li>
@@ -172,12 +163,13 @@
                 <div class="sidebar-content">
                     <div class="user">
                         <div class="avatar-sm float-left mr-2">
-                            <img src="/assets/img/ava-musa.jpg" alt="..." class="avatar-img rounded-circle">
+                            <img src="<?= base_url(); ?>/assets/img/<?= user()->user_image; ?>" alt="..."
+                                class="avatar-img rounded-circle">
                         </div>
                         <div class="info">
                             <a data-toggle="collapse" href="/" aria-expanded="true">
                                 <span>
-                                    Musa
+                                    <?= user()->fullname; ?>
                                     <span class="user-level">Administrator</span>
                                 </span>
                             </a>
@@ -186,7 +178,6 @@
                     </div> <!-- end user -->
 
                     <ul class="nav nav-primary">
-                        <li><a href="/customer/index">Pindah</a></li>
                         <li class="nav-item <?php if ($title == 'Admin Dashboard | Sumber Jaya Furniture') : echo 'active';
                                             endif; ?>">
                             <a href="/">
@@ -243,14 +234,8 @@
     <!-- Moment JS -->
     <script src="/assets/js/plugin/moment/moment.min.js"></script>
 
-    <!-- Chart JS -->
-    <script src="/assets/js/plugin/chart.js/chart.min.js"></script>
-
     <!-- jQuery Sparkline -->
     <script src="/assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
-
-    <!-- Chart Circle -->
-    <script src="/assets/js/plugin/chart-circle/circles.min.js"></script>
 
     <!-- Datatables -->
     <script src="/assets/js/plugin/datatables/datatables.min.js"></script>
@@ -265,14 +250,8 @@
     <script src="/assets/js/plugin/jqvmap/jquery.vmap.min.js"></script>
     <script src="/assets/js/plugin/jqvmap/maps/jquery.vmap.world.js"></script>
 
-    <!-- Google Maps Plugin -->
-    <script src="/assets/js/plugin/gmaps/gmaps.js"></script>
-
     <!-- Dropzone -->
     <script src="/assets/js/plugin/dropzone/dropzone.min.js"></script>
-
-    <!-- Fullcalendar -->
-    <script src="/assets/js/plugin/fullcalendar/fullcalendar.min.js"></script>
 
     <!-- DateTimePicker -->
     <script src="/assets/js/plugin/datepicker/bootstrap-datetimepicker.min.js"></script>

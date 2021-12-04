@@ -39,7 +39,7 @@
 }
 
 /* icon */
-.icon-menu, .fa-bars, .fa-layer-group, .icon-options-vertical{
+.icon-menu, .fa-bars, .fa-layer-group, .fa-ellipsis-v{
 	color: rgb(94, 94, 94);
 }
 
@@ -101,4 +101,19 @@
 }
 .keterangan__barang{
 	text-align: center;
+}
+
+/* ************************ LOGIN ***************************** */
+.login__section{
+	background: #f8f9fd;
+}
+.btn-tokos, .btn-user{
+	background-color: #e7da27 !important;
+	color: white !important;
+}
+.akun__text a{
+	color: #7e7e7e !important;
+}
+.img__login{
+	width: 50%;
 }
