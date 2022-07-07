@@ -41,6 +41,10 @@ $routes->get('/admin/index', 'Admin::index', ['filter' => 'role:admin']);
 $routes->get('/customer', 'Customer::index', ['filter' => 'role:user']);
 $routes->get('/customer/index', 'Customer::index', ['filter' => 'role:user']);
 
+// Edit keranjang
+//$route['/keranjang/(:num)/(:any)'] = 'customer/edit_keranjang/$1/$2';
+$routes->get('edit_keranjang/(:any)', 'Customer::edit_keranjang/$1');
+
 #$routes->get('/edit/(:segment)','Edit::ShowEditBarang/$1');
 
 /*

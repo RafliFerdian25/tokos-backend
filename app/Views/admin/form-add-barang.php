@@ -36,9 +36,12 @@
                                     <label for="name" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Nama <span
                                             class="required-label">*</span></label>
                                     <div class="col-lg-7 col-md-9 col-sm-8">
-                                        <input type="text" class="form-control" id="nama" name="nama" placeholder=""
-                                            required autofocus>
-                                        <!--  -->
+                                        <input type="text"
+                                            class="form-control <?= ($validation->hasError('nama')) ? 'is-invalid' : ''; ?>"
+                                            id="nama" name="nama" value="<?= old('nama'); ?>" autofocus>
+                                        <div class="invalid-feedback">
+                                            <?= $validation->getError('nama'); ?>
+                                        </div>
                                     </div>
                                 </div> <!-- end nama -->
 
@@ -47,8 +50,13 @@
                                             class="required-label">*</span></label>
                                     <br>
                                     <div class="col-lg-7 col-md-9 col-sm-8">
-                                        <input class="form-control" type="number" id="stok" min="1" step="1"
-                                            name="stok">
+                                        <input
+                                            class="form-control <?= ($validation->hasError('stok')) ? 'is-invalid' : ''; ?>"
+                                            type="number" id="stok" min="1" step="1" name="stok"
+                                            value="<?= old('stok'); ?>">
+                                        <div class="invalid-feedback">
+                                            <?= $validation->getError('stok'); ?>
+                                        </div>
                                     </div>
                                 </div> <!-- end stok -->
 
@@ -57,8 +65,13 @@
                                         <span class="required-label">*</span></label>
                                     <br>
                                     <div class="col-lg-7 col-md-9 col-sm-8">
-                                        <input class="form-control" type="number" id="harga" min="500" step="500"
-                                            name="harga">
+                                        <input
+                                            class="form-control  <?= ($validation->hasError('harga')) ? 'is-invalid' : ''; ?>"
+                                            type="number" id="harga" min="500" step="500" name="harga"
+                                            value="<?= old('harga'); ?>">
+                                        <div class="invalid-feedback">
+                                            <?= $validation->getError('harga'); ?>
+                                        </div>
                                     </div>
                                 </div> <!-- end harga -->
 
@@ -68,13 +81,15 @@
                                             class="required-label">*</span></label>
                                     <br>
                                     <div class="col-lg-7 col-md-9 col-sm-8">
-                                        <textarea class="form-control" name="keterangan" id="Keterangan" cols="30"
-                                            rows="10">
-												</textarea>
+                                        <textarea
+                                            class="form-control <?= ($validation->hasError('keterangan')) ? 'is-invalid' : ''; ?>"
+                                            name="keterangan" id="Keterangan" cols="30" rows="10">
+                                            <?= old('keterangan'); ?></textarea>
+                                        <div class="invalid-feedback">
+                                            <?= $validation->getError('keterangan'); ?>
+                                        </div>
                                     </div>
                                 </div> <!-- end keterangan -->
-
-
 
                                 <div class="form-group form-show-validation row">
                                     <label class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Upload Gambar <span
@@ -84,13 +99,14 @@
                                             <img class="img-upload-preview" width="100" height="100"
                                                 src="http://placehold.it/100x100" alt="preview">
                                             <input type="file" class="form-control form-control-file" id="image"
-                                                name="image" accept="image/*" required>
+                                                name="image" accept="image/*">
 
                                             <label for="image" class="btn btn-primary btn-round btn-lg"><i
                                                     class="fa fa-file-image"></i> Upload gambar</label>
                                         </div>
                                     </div>
                                 </div>
+                                <!-- end gambar -->
                             </div>
                             <div class="card-action">
                                 <div class="row">

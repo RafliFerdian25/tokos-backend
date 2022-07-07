@@ -8,9 +8,10 @@
             <div class="col-lg-4 col-md-12 g-5" style="margin-top: 10vw; float: right;">
                 <div class="p-3 ">
                     <h1><span style="color: #FFE500;align-items: center;margin-top: 20rem;">Selamat datang di</span><br>
-                        Toko Anak Kos</h1>
-                    <a class="button text-decoration-none" href="produk.html"> <button class="produk d-block mt-3 "
-                            style="background-color: #466545;color: white;padding: 6px 10px;"> Produk</button> </a>
+                        <strong>Toko Anak Kos</strong>
+                    </h1>
+
+                    <a class="button text-decoration-none" href="/customer/produk"> <button class="btn  d-block mt-2 " style="font-size: larger; background-color:darkgreen;color:white"> Cari Barangmu Disini</button> </a>
                 </div>
             </div>
             <div class="col-lg-7  col-md-12 mb-5">
@@ -24,7 +25,7 @@
     <img src="/assets/img/atribut.png" style="width: 15vw;" alt="">
 </div>
 <!-- slide -->
-<div class="container  p-lg-5 p-md-4 p-sm-3 bg-light" style="border-radius: 50px;">
+<!-- <div class="container  p-lg-5 p-md-4 p-sm-3 bg-light" style="border-radius: 50px;">
     <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
         <div class="carousel-inner">
             <?php foreach ($barang as $data) : ?>
@@ -51,7 +52,7 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
-</div>
+</div> -->
 </div>
 
 <?= $this->endSection(); ?>

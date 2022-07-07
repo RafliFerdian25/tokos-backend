@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\BarangModel;
+use Config\Validation;
 
 class Tambah extends BaseController
 {
@@ -18,8 +19,10 @@ class Tambah extends BaseController
     public function tambah()
     {
         //$kategori = $this->kategoriModel->findAll();
+        session();
         $data = [
             'title' => 'Form Tambah Barang | Sumber Jaya Furniture',
+            'validation' => \Config\Services::validation()
             //'kategori' => $kategori
         ];
 
@@ -27,37 +30,33 @@ class Tambah extends BaseController
     }
     function tambahBarang()
     {
-        // helper(['form','url']);
+        if (!$this->validate([
+            'nama' => [
+                'rules' => 'required',
+                'errors' => ['required' => '{field} barang harus diisi'],
+            ],
+            'stok' => [
+                'rules' => 'required',
+                'errors' => ['required' => "{field} barang harus diisi"],
+            ],
+            'harga' => [
+                'rules' => 'required',
+                'errors' => ['required' => "{field} barang harus diisi"],
+            ],
+            'keterangan' => [
+                'rules' => 'required',
+                'errors' => ['required' => "{field} barang harus diisi"],
+            ],
+            'image' => [
+                'rules' => 'required',
+                'errors' => ['required' => "{field} barang harus diisi"],
+            ]
+        ])) {
+            $validation = \Config\Services::validation();
+            // dd($validation);
+            return redirect()->to('/tambah/tambah')->withInput('validation', $validation);
+        }
 
-        // $error = $this->validate([
-        // 	'isbn' => 'required|min_length[13]|max_length[13]',
-        // 	'author' => 'required',
-        // 	'title' => 'required',
-        // 	'price' => 'required|numeric'
-        // ]);
-
-        // if(!$error)
-        // {
-        // 	echo view('add_book', [
-        // 		'error' => $this->validator
-        // 	]);
-        // }
-        // else
-        // {
-        // if (!$this->validate([
-        //     'image' => [ 'rules' => 'uploaded[image]|max_size[image,2048]|is_image[image]|mime_in[image,image/jpg,image/jpeg,image/png]',
-        //     'errors' =>  [
-        //         'Uploaded' => 'Pilih gambar',
-        //         'max_size' => 'Ukuran gambar terlalu besar',
-        //         'is_image' => 'Yang dipilih bukan gambar',
-        //         'mime_in'  => 'Yang dipilih bukan gambar'
-        //     ]
-        //     ]
-        // ])) 
-        // {
-        //     $validation = \Config\Services::validation();
-        //     return redirect()->to('/tambah/tambah')->withInput();
-        // }
 
         $image = $this->request->getFile('image');
         if ($image->getError() == 4) {
@@ -82,11 +81,9 @@ class Tambah extends BaseController
         ]);
 
         $session = \Config\Services::session();
-        // $session->setFlashdata('success', 'Book Added');
 
         session()->setFlashdata('add-msg-barang', 'Data Barang berhasil ditambahkan.');
         // dd($data);
         return redirect()->to('/admin/barang');
-        // }
     }
 }

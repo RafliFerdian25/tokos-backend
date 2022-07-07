@@ -9,8 +9,6 @@
                 <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
                     <div>
                         <h2 class="text-abu pb-2 fw-bold">Dashboard Admin</h2>
-                        <h5 class="text-abu op-7 mb-2">Sumber Jaya Furniture selalu menyediakan barang
-                            berkualitas, kuat, dan tahan lama.</h5>
                     </div>
                 </div>
             </div>
@@ -32,8 +30,8 @@
                                 <div class="col col-stats ml-3 ml-sm-0">
                                     <div class="numbers">
                                         <?php foreach ($barangjual as $sum) : ?>
-                                        <p class="card-category">Total Barang Terjual</p>
-                                        <h4 class="card-title"><?= $sum['total_item']; ?></h4>
+                                            <p class="card-category">Total Barang Terjual</p>
+                                            <h4 class="card-title"><?= $sum['total_item']; ?></h4>
                                         <?php endforeach; ?>
                                     </div>
                                 </div>
@@ -55,8 +53,8 @@
                                 <div class="col col-stats ml-3 ml-sm-0">
                                     <div class="numbers">
                                         <?php foreach ($pembeli as $pembeli) : ?>
-                                        <p class="card-category">Total Penjualan</p>
-                                        <h4 class="card-title"><?= $pembeli['idpenjualan']; ?></h4>
+                                            <p class="card-category">Total Penjualan</p>
+                                            <h4 class="card-title"><?= $pembeli['idpenjualan']; ?></h4>
                                         <?php endforeach; ?>
                                     </div>
                                 </div>
@@ -78,9 +76,9 @@
                                 <div class="col col-stats ml-3 ml-sm-0">
                                     <div class="numbers">
                                         <?php foreach ($pendapatan as $pendapatan) : ?>
-                                        <p class="card-category">Total Pendapatan</p>
-                                        <h4 class="card-title">IDR
-                                            <?= number_format($pendapatan['total_harga']); ?></h4>
+                                            <p class="card-category">Total Pendapatan</p>
+                                            <h4 class="card-title">IDR
+                                                <?= number_format($pendapatan['total_harga']); ?></h4>
                                         <?php endforeach; ?>
                                     </div>
                                 </div>
@@ -106,19 +104,18 @@
                             <!-- top sale -->
                             <?php $i = 1; ?>
                             <?php foreach ($terlaris as $terlaris) : ?>
-                            <div class="separator-dashed"></div>
-                            <div class="d-flex">
-                                <avatar>
-                                    <img src="<?= base_url(); ?>/assets/img/favicon/<?= $i++; ?>.png" alt="..."
-                                        class="avatar-img rounded-circle">
-                                </avatar>
-                                <div class="flex-1 pt-1 ml-2">
-                                    <h6 class="fw-bold mb-1"><?= $terlaris['namaBarang']; ?></h6>
-                                </div>
-                                <div class="d-flex ml-auto align-items-center">
-                                    <h3 class="text-info fw-bold"><?= $terlaris['total_terjual']; ?></h3>
-                                </div>
-                            </div> <!-- End top sale -->
+                                <div class="separator-dashed"></div>
+                                <div class="d-flex">
+                                    <avatar>
+                                        <img src="<?= base_url(); ?>/assets/img/favicon/<?= $i++; ?>.png" alt="..." class="avatar-img rounded-circle">
+                                    </avatar>
+                                    <div class="flex-1 pt-1 ml-2">
+                                        <h6 class="fw-bold mb-1"><?= $terlaris['namaBarang']; ?></h6>
+                                    </div>
+                                    <div class="d-flex ml-auto align-items-center">
+                                        <h3 class="text-info fw-bold"><?= $terlaris['total_terjual']; ?></h3>
+                                    </div>
+                                </div> <!-- End top sale -->
                             <?php endforeach; ?>
 
                             <div class="separator-dashed"></div>
@@ -145,8 +142,8 @@
                                     </thead>
                                     <tbody>
                                         <?php foreach ($bulan as $bulan) : ?>
-                                        <tr>
-                                            <td><?php if ($bulan['bulan'] == 1) {
+                                            <tr>
+                                                <td><?php if ($bulan['bulan'] == 1) {
                                                         echo "Januari";
                                                     } else if ($bulan['bulan'] == 2) {
                                                         echo "Februari";
@@ -172,11 +169,10 @@
                                                         echo "Desember";
                                                     }
                                                     ?></td>
-                                            <td><?= $bulan['jumlah']; ?></td>
-                                            <td><?= number_format($bulan['total_penjualan']); ?></td>
-                                            <td><a href="/admin/laporan/<?= $bulan['bulan']; ?>"
-                                                    class="badge badge-info">Lihat Detail</a></td>
-                                        </tr>
+                                                <td><?= $bulan['jumlah']; ?></td>
+                                                <td><?= number_format($bulan['total_penjualan']); ?></td>
+                                                <td><a href="/admin/laporan/<?= $bulan['bulan']; ?>" class="badge badge-info">Lihat Detail</a></td>
+                                            </tr>
                                         <?php endforeach; ?>
                                         <!-- End Bulan -->
                                     </tbody>

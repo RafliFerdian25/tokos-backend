@@ -124,6 +124,7 @@ class Customer extends BaseController
         $row = (string)$rowid;
         $cart_row = $cart->contents($rowid);
         $qty_row = $cart_row[$row]['qty'];
+        //dd($cart);
         if ($qty_row > 1) {
             $cart->update(array(
                 'rowid'   => $rowid,
@@ -134,11 +135,31 @@ class Customer extends BaseController
         }
         return redirect()->to('/Customer/keranjang');
     }
+    public function edit_keranjang($rowid = null,$qty = null)
+    {
+        $cart = \Config\Services::cart();
+        $row = (string)$rowid;
+        $cart_row = $cart->contents($rowid);
+        $qty_row = $cart_row[$row]['qty'];
+        $qty_new = $this->request->getVar('qty_keranjang');
+        //dd($rowid);
+        if ($qty_row >= 1) {
+                $cart->update(array(
+                    'rowid'   => $rowid,
+                    'qty'     => $qty_new
+                ));
+        } else {
+            $cart->remove($rowid);
+        }
+        //dd($qty_row);
+        return redirect()->to('/customer/keranjang');
+    }
     /************************** penjualan **************************** */
     public function pembayaran()
     {
         $cart = \Config\Services::cart();
         $keranjang = $cart->contents();
+
         // $this->builder = $this->db->table('users');
         // $pelanggan = $this->builder->get();
         $data = [
@@ -229,7 +250,7 @@ class Customer extends BaseController
             $namaImage = $this->request->getVar('imageLama');
         } else { //jika user upload file baru
             //mengambil nama file gambar
-            $namaImage = $image->getName();
+            $namaImage = $image->getRandomName();
             //pindahkan letak file
             $image->move('assets/img', $namaImage);
             //hapus file lama

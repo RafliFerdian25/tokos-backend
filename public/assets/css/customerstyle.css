@@ -7,22 +7,41 @@
 nav {
   position: sticky;
   top: 0;
-  transition: top 0.5s;
+  transition: top 0.2s;
 }
-a {
+/* .navbar-nav a:hover {
+  font-weight: 800;
+  font-size: larger;
   color: #466545;
-}
+} */
+/* a {
+  color: #466545;
+  font-weight: 200;
+  font-size: small;
+} */
 /* nav */
 .nav-link {
   color: #466545;
   margin: 0 10px;
-  font-weight: 400 !important;
+}
+.nav-link:hover {
+  font-size: large;
+  font-weight: 700;
+  color: #466545;
 }
 
 .active {
-  font-size: large !important;
-  font-weight: 700 !important;
+  font-weight: 800;
+  font-size: larger;
   color: #466545;
+}
+.menu a {
+  color: white;
+  font-size: 2vh;
+}
+.menu a:hover {
+  color: blue;
+  font-size: 2vh;
 }
 
 /* main */
@@ -42,8 +61,11 @@ footer {
 
 .akun a {
   color: white;
-  text-decoration: none;
-  margin-left: 1vw;
+  font-size: 2vh;
+}
+.akun a:hover {
+  color: blue;
+  font-size: 2vh;
 }
 
 /* index */
@@ -76,21 +98,23 @@ footer {
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap");
 
 /* ********************************************   PROFILE   ******************************************** */
-.ubah__porfile .btn-primary, .data__profile .btn-primary{
-	background: #767672 !important;
-	border: #ffffff !important;
-	color: #ffffff !important;
+.ubah__porfile .btn-primary,
+.data__profile .btn-primary {
+  background: #767672 !important;
+  border: #ffffff !important;
+  color: #ffffff !important;
 }
-.ubah__porfile .form-control-file{
+.ubah__porfile .form-control-file {
   background-color: #767672;
 }
-.data__profile{
-  font-size: 18px;
+.data__profile {
+  font-size: medium;
+  /* font-size: 12px; */
 }
-.data__profile table tr td{
-  padding: 10px;
+.data__profile table tr td {
+  padding: 12px;
 }
-.data__profile a{
+.data__profile a {
   margin-right: 5px;
   text-decoration: none;
 }
